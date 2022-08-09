@@ -2,6 +2,8 @@ package com.swa.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +37,11 @@ public class UserServlet extends HttpServlet {
 			UserBean user = new UserBean();
 			UserDao dao = new UserDao();
 			user.setEmail((request.getParameter("email")));
+			user.setPassword(request.getParameter("password").getBytes());
 			boolean result = dao.addUser(user);
+			int id_user = 0; //used to set foreign key with the assigned user
+			id_user = dao.getID(user);
+			boolean result_pass = dao.insertPassword(user, id_user);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("addUser.jsp");
 			dispatcher.include(request, response);
 			printWriter.print("<br><h2>User added Successfully!!</h2>");

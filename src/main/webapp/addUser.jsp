@@ -17,11 +17,16 @@
 
 
 
-		<table class="table table-borderless" border="1" align="center" cellpadding="5"
-			style="font-size: 200%; font-family: inherit; font-style: normal; background-color: window;">
+		<table class="table table-borderless" border="1" align="center"
+			cellpadding="5"
+			style="font-size: 100%; font-family: inherit; font-style: normal; background-color: window; width:30">
 			<tr>
 				<td>Email</td>
-				<td><input type="text" name="email"></td>
+				<td><input type="email" name="email"></td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td><input type="text" name="password"></td>
 			</tr>
 			<tr>
 				<td></td>

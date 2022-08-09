@@ -3,7 +3,7 @@ package com.swa.user;
 public class UserBean {
 	private int id;
 	private String email;
-	private String password;
+	private byte[] password;
 
 	public int getId() {
 		return id;
@@ -21,22 +21,15 @@ public class UserBean {
 		this.email = email;
 	}
 
-	public String getPassword() {
+	public byte[] getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(byte[] password) {
 		this.password = password;
 	}
 
-	public UserBean(int id, String email, String password) {
-		    super();
-		    this.id = id;
-		    this.email = email;
-		    this.password = password;
-	}
-
 	public UserBean() {
-		    super();
-		  }
+		super();
+	}
 }
