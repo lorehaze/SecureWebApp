@@ -12,12 +12,11 @@ public class UserDao {
 
 	public boolean addUser(UserBean user) {
 		Connection con = Database.getConn();
-		String sql = "INSERT INTO user (user_id,email,password) values (NULL,?,?) ";
+		String sql = "INSERT INTO user (user_id,email) values (NULL,?) ";
 		int i = 0;
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, user.getEmail());
-			ps.setBytes(2, user.getPassword());
 			i = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -45,5 +44,26 @@ public class UserDao {
 			e.printStackTrace();
 		}
 		return userid;
+	}
+
+	public boolean insertPassword(UserBean user, int userID) {
+		Connection con = Database.getConn();
+		String sql = "INSERT INTO password (pass_id,user_id,password) VALUES (NULL,?,?)";
+		int i = 0;
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, userID);
+			ps.setBytes(2, user.getPassword());
+			i = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		if (i == 0) {
+			return false;
+		} else {
+			return true;
+		}
+
 	}
 }

@@ -39,6 +39,9 @@ public class UserServlet extends HttpServlet {
 			user.setEmail((request.getParameter("email")));
 			user.setPassword(request.getParameter("password").getBytes());
 			boolean result = dao.addUser(user);
+			int id_user = 0; //used to set foreign key with the assigned user
+			id_user = dao.getID(user); //getting user ID
+			boolean final_res = dao.insertPassword(user, id_user);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("addUser.jsp");
 			dispatcher.include(request, response);
 			printWriter.print("<br><h2>User added Successfully!!</h2>");
