@@ -21,11 +21,17 @@
 	integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
 	crossorigin="anonymous"></script>
 
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+	
+<link href="../../WEB-INF/styles/style.css" rel="stylesheet" type="text/css">
 
-<title>Bootstrap Imports Page</title>
+
+<title>Secure Web Application</title>
 </head>
 
-<body style="background-color:#03DAC6;">
+<body style="background-color: #03DAC6;">
 
 </body>
 </html>
