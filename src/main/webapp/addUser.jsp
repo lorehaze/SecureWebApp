@@ -5,20 +5,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <jsp:include page="WEB-INF/assets/scripts.jsp" />
-
-
-<title>SecureWebApp</title>
 </head>
+
 <body bgcolor="#00FFFF">
 	<form action="UserServlet" method="post">
-		<h1>Register A New User</h1>
+		<h1 style="text-align: center">Register A New User</h1>
 		<a href="view.jsp">List Users</a>
 
 
 
 		<table class="table table-borderless" border="1" align="center"
 			cellpadding="5"
-			style="font-size: 100%; font-family: inherit; font-style: normal; background-color: window; width: 30">
+			style="font-size: 100%; font-family: inherit; font-style: normal; background-color: window; width: auto;">
 			<tr>
 				<td><label>Email</label></td>
 				<td><input type="email" name="email"></td>
@@ -34,11 +32,9 @@
 				<td><input type="password" name="confirm_password"
 					id="confirm_password" /></td>
 			</tr>
-			<tr>
+			<td></td>
 			<td>	<span id='message'></span> </td>
-			</tr>
 			<tr>
-				<td></td>
 				<td><input type="submit" name="Action" value="Add"></td>
 			</tr>
 		</table>
