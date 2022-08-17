@@ -12,9 +12,15 @@
 		<br><br><br>
 		<h1 align="center">Secure Web App</h1>
 				
-		<br><br><br><br><br><br><br><br><br><br><br><br>
+		<br><br><br>
         <div class="col-md-12 text-center">
 		<a href="addUser.jsp" class="btn btn-light" role="button" aria-disabled="true">Register New User</a>
+		<br><br><br><br>
+		<a href="login.jsp" class="btn btn-light" role="button" aria-disabled="true">Login with your account</a>
+		</div>		
+		
+        <div class="col-md-12 text-center">
+		
 		</div>		
 		
 </body>

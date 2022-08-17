@@ -32,7 +32,6 @@ public class UserServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		if (request.getParameter("Action").equals("Add")) {
-			System.out.println("in");
 			PrintWriter printWriter = response.getWriter();
 			UserBean user = new UserBean();
 			UserDao dao = new UserDao();
@@ -42,6 +41,7 @@ public class UserServlet extends HttpServlet {
 			int id_user = 0; //used to set foreign key with the assigned user
 			id_user = dao.getID(user); //getting user ID
 			boolean final_res = dao.insertPassword(user, id_user);
+			System.out.println("User Added");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("addUser.jsp");
 			dispatcher.include(request, response);
 			printWriter.print("<br><h2>User added Successfully!!</h2>");

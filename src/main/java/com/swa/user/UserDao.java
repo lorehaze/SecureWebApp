@@ -64,6 +64,30 @@ public class UserDao {
 		} else {
 			return true;
 		}
-
 	}
+
+	public boolean login(UserBean user, int userID) {
+		Connection con = Database.getConn();
+		int passid = 0;
+
+		String login_query = "SELECT pass_id FROM password WHERE user_id=? AND password=?";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(login_query);
+			ps.setInt(1, userID);
+			ps.setBytes(2, user.getPassword());
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				passid = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if (passid == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
 }
