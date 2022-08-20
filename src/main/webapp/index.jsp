@@ -4,15 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<jsp:include page="WEB-INF/assets/scripts.jsp" />
+<jsp:include page="assets/scripts.jsp" />
+<link rel="stylesheet" href="assets/test.css">
+
 <title>SecureWebApp</title>
 </head>
 
 <body>
-		<br><br><br>
-		<h1 align="center">Secure Web App</h1>
-				
-		<br><br><br>
         <div class="col-md-12 text-center">
 		<a href="addUser.jsp" class="btn btn-light" role="button" aria-disabled="true">Register New User</a>
 		<br><br><br><br>

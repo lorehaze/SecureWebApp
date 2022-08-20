@@ -4,14 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="WEB-INF/assets/scripts.jsp" />
+<jsp:include page="assets/scripts.jsp" />
+<link rel="stylesheet" href="assets/test.css">
 </head>
 <body>
-
+<br><br>
 	<form action="LoginServlet" method="post">
-		<table class="table table-borderless" border="1" align="center"
-			cellpadding="5"
-			style="font-size: 100%; font-family: inherit; font-style: normal; background-color: window; width: auto;">
+		<table class="table table-borderless" align="center"
+			cellpadding="5">
 
 			<tr>
 				<td><label>Email: </label>
@@ -22,7 +22,10 @@
 				<td><input name="password" id="password" type="password" /></td>
 			</tr>
 			<tr>
-				<td><input type="submit" name="Action" value="Login"></td>
+				<td><button type="submit" name="Action" value="Login"
+						class="btn btn-outline-success btn-xs custom-1">Login</button></td>
+				<td><a href="index.jsp"
+					class="btn btn-outline-secondary btn-xs custom-1">Back</a></td>
 			</tr>
 		</table>
 	</form>
