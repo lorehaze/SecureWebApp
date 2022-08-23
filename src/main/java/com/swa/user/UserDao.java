@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import com.swa.user.UserBean;
 import com.swa.dbconnection.Database;
@@ -58,6 +59,7 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		Arrays.fill(user.getPassword(), (byte) 0);	//empty password array
 
 		if (i == 0) {
 			return false;
@@ -83,6 +85,7 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		Arrays.fill(user.getPassword(), (byte) 0); //empty password array
 		if (passid == 0) {
 			return false;
 		} else {
