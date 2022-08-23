@@ -90,4 +90,33 @@ public class UserDao {
 		}
 	}
 
+	public boolean userAlredyRegistered(UserBean user) {
+		boolean isRegistered = false;
+		int user_id, temp_id = 0;
+
+		Connection con = Database.getConn();
+
+		String userExists_query = "SELECT user_id FROM user WHERE email=?";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(userExists_query);
+			ps.setString(1, user.getEmail());
+			ResultSet rs = ps.executeQuery();
+
+			if (rs != null) {
+				if (rs.next()) {
+					temp_id = rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		if (temp_id != 0) {
+			user_id = temp_id;
+			isRegistered = true;
+		}
+
+		return isRegistered;
+	}
 }

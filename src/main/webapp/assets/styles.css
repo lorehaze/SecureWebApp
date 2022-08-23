@@ -18,6 +18,12 @@ h2 {
 	color: white;
 }
 
+h4 {
+	font-size: 20px;
+	color: white;
+	text-align: center;
+}
+
 .custom-1 {
 	display: flex;
 	justify-content: center;

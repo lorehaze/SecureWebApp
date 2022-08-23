@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <jsp:include page="assets/scripts.jsp" />
-<link rel="stylesheet" href="assets/test.css">
+<link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
 <br><br>

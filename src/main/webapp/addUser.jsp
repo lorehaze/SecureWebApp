@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <jsp:include page="assets/scripts.jsp" />
-<link rel="stylesheet" href="assets/test.css">
+<link rel="stylesheet" href="assets/styles.css">
 </head>
 
 <body bgcolor="#00FFFF">

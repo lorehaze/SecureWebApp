@@ -5,21 +5,29 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <jsp:include page="assets/scripts.jsp" />
-<link rel="stylesheet" href="assets/test.css">
+<link rel="stylesheet" href="assets/styles.css">
 
 <title>SecureWebApp</title>
 </head>
 
 <body>
-        <div class="col-md-12 text-center">
-		<a href="addUser.jsp" class="btn btn-light" role="button" aria-disabled="true">Register New User</a>
-		<br><br><br><br>
-		<a href="login.jsp" class="btn btn-light" role="button" aria-disabled="true">Login with your account</a>
-		</div>		
-		
-        <div class="col-md-12 text-center">
-		
-		</div>		
-		
+	<div class="col-md-12 text-center">
+		<br>
+		<br>
+		<br>
+		<br>
+		<center>
+			<a href="addUser.jsp" class="btn btn-outline-dark btn-sm custom-1"
+				role="button" aria-disabled="true">Register</a> <br>
+		</center>
+		<br>
+		<center>
+			<a href="login.jsp" class="btn btn-outline-dark btn-sm custom-1"
+				role="button" aria-disabled="true">Login</a>
+		</center>
+	</div>
+
+	<div class="col-md-12 text-center"></div>
+
 </body>
 </html>

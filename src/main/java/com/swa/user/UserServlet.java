@@ -37,14 +37,24 @@ public class UserServlet extends HttpServlet {
 			UserDao dao = new UserDao();
 			user.setEmail((request.getParameter("email")));
 			user.setPassword(request.getParameter("password").getBytes());
-			boolean result = dao.addUser(user);
-			int id_user = 0; //used to set foreign key with the assigned user
-			id_user = dao.getID(user); //getting user ID
-			boolean final_res = dao.insertPassword(user, id_user);
-			System.out.println("User Added");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("addUser.jsp");
-			dispatcher.include(request, response);
-			printWriter.print("<br><h2>User added Successfully!!</h2>");
+			boolean alredyRegistered = dao.userAlredyRegistered(user);
+			System.out.println(alredyRegistered);
+
+			if (alredyRegistered != true) {	// if user isn't alredy registered
+				boolean result = dao.addUser(user);
+				int id_user = 0; // used to set foreign key with the assigned user
+				id_user = dao.getID(user); // getting user ID
+				boolean final_res = dao.insertPassword(user, id_user);
+				System.out.println("User Added");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("addUser.jsp");
+				dispatcher.include(request, response);
+				printWriter.print("<br><h4>User successfully registered!!</h4>");
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("addUser.jsp");
+				dispatcher.include(request, response);
+				printWriter.print("<br><h4>User alredy exists!!</h4>");
+			}
+
 		}
 	}
 }
