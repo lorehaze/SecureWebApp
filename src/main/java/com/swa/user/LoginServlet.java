@@ -3,6 +3,7 @@ package com.swa.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,38 +20,41 @@ import com.swa.user.UserBean;
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public LoginServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		if (request.getParameter("Action").equals("Login")) {
 			UserBean user = new UserBean();
 			UserDao dao = new UserDao();
-			int id_user=0;
+			int id_user = 0;
 			boolean result = false;
 			PrintWriter printWriter = response.getWriter();
 
-			
 			user.setEmail((request.getParameter("email")));
 			user.setPassword(request.getParameter("password").getBytes());
-			id_user = dao.getID(user); //getting user ID
+			id_user = dao.getID(user); // getting user ID
 
 			if (id_user == 0) {
 				printWriter.print("<br><h2>User does not exist! <br><br> Please check again.</h2>");
@@ -58,11 +62,14 @@ public class LoginServlet extends HttpServlet {
 				String email = user.getEmail();
 				result = dao.login(user, id_user);
 				if (result == false) {
-					printWriter.print("<br><h2>Wrong password. <br><br> Please check your password.</h2>");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+					dispatcher.include(request, response);
+					printWriter.print("<br><h4>Wrong password. <br><br> Please check your password.</h4>");
 				} else {
 					printWriter.print("<br>User successfully logged in" + " " + "as" + " " + email);
 				}
 			}
-		}	
+			Arrays.fill(user.getPassword(), (byte) 0); // empty password array
+		}
 	}
 }

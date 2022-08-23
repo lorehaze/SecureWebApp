@@ -15,8 +15,7 @@
 
 
 
-		<table class="table table-borderless" align="center"
-			cellpadding="5">
+		<table class="table table-borderless" align="center" cellpadding="5">
 			<tr>
 				<td><label>Email</label></td>
 				<td><input type="email" name="email"></td>
@@ -25,20 +24,21 @@
 				<!-- <td>Password</td>
 				 <td><input type="password" name="password"></td> -->
 				<td><label>password :</label>
-				<td><input name="password" id="password" type="password" /></td>
+				<td><input name="password" id="password" type="password"
+					required="required" /></td>
 			</tr>
 			<tr>
 				<td><label>confirm password:</label></td>
 				<td><input type="password" name="confirm_password"
-					id="confirm_password" /></td>
+					id="confirm_password" required="required" /></td>
 			</tr>
 			<tr>
 				<td></td>
 				<td><span id='message'></span></td>
 			<tr>
 
-				<td><button type="submit" name="Action" value="Add"
-						class="btn btn-outline-success btn-xs custom-1">Add User
+				<td><button id="btn-add" type="submit" name="Action" value="Add"
+						class="btn btn-outline-success btn-xs custom-1" disabled="true">Add User
 					</button></td>
 
 				<td><a href="index.jsp"
@@ -55,6 +55,27 @@
 				$('#message').html('Matching').css('color', 'green');
 			} else
 				$('#message').html('Not Matching').css('color', 'red');
+		});
+	</script>
+
+	<!-- Unlock button if passwords match -->
+
+	<script>
+		$("#confirm_password").blur(function() {
+			var user_pass = $("#password").val();
+			var user_pass2 = $("#confirm_password").val();
+			//var enter = $("#enter").val();
+
+			if (user_pass.length == 0) {
+				alert("Please, fill password first");
+				$("#btn-add").prop('disabled', true)//use prop()
+			} else if (user_pass == user_pass2) {
+				$("#btn-add").prop('disabled', false)//use prop()
+			} else {
+				$("#btn-add").prop('disabled', true)//use prop()
+				alert("Password doesn't match!");
+			}
+
 		});
 	</script>
 
