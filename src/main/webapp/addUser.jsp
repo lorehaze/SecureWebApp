@@ -16,11 +16,10 @@
 		<table class="table table-borderless" align="center" cellpadding="5">
 			<tr>
 				<td><label>Email</label></td>
-				<td><input id="email" type="email" name="email" required="required"></td>
+				<td><input id="email" type="email" name="email"
+					required="required"></td>
 			</tr>
 			<tr>
-				<!-- <td>Password</td>
-				 <td><input type="password" name="password"></td> -->
 				<td><label>password :</label>
 				<td><input name="password" id="password" type="password"
 					required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" /></td>
@@ -48,10 +47,25 @@
 			</tr>
 		</table>
 
+		<div id="psw-message">
+			<h4>Password must contain the following:</h4>
+			<p id="letter" class="invalid">
+				A <b>lowercase</b> letter
+			</p>
+			<p id="capital" class="invalid">
+				A <b>capital (uppercase)</b> letter
+			</p>
+			<p id="number" class="invalid">
+				A <b>number</b>
+			</p>
+			<p id="length" class="invalid">
+				Minimum <b>8 characters</b>
+			</p>
+		</div>
 	</form>
 
-
 	<script src="assets/js/passwordVerification.js"></script>
+	<script src="assets/js/passwordValidation.js"></script>
 
 </body>
 </html>

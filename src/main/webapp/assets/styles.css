@@ -1,9 +1,11 @@
 @charset "UTF-8";
 
+/* body style */
 body {
 	background-color: #03DAC6;
 }
 
+/* title style */
 h1 {
 	font-size: 60px;
 	color: #00665C;
@@ -11,22 +13,26 @@ h1 {
 	margin-bottom: 0%;
 }
 
+/* label style */
 label {
 	color: #00665C
 }
 
+/* subtitle style */
 h2 {
 	font-size: 40px;
 	color: white;
 	text-align: center;
 }
 
+/* footer style */
 h4 {
 	font-size: 20px;
 	color: white;
 	text-align: center;
 }
 
+/* button style */
 .custom-1 {
 	display: flex;
 	justify-content: center;
@@ -35,15 +41,18 @@ h4 {
 	height: 50px;
 }
 
+/* text style for section buttons */
 .custom-2 {
 	font-size: 20px;
 	color: #00665C;
 }
 
+/* text style for home page */
 .custom-3 {
 	font-size: 20px;
 }
 
+/* table style */
 .table {
 	opacity: 0.8;
 	background: #ffffff;
@@ -54,12 +63,56 @@ h4 {
 	width: auto;
 }
 
+/* footer style */
 footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  color: #00665C;
-  text-align: center;
-  font-size: 15px;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	color: #00665C;
+	text-align: center;
+	font-size: 15px;
+}
+
+/* The message box is shown when the user clicks on the password field */
+#psw-message {
+	display: none;
+	color: #000;
+	position: relative;
+	padding: 20px;
+	margin-top: 10px;
+	
+}
+
+#psw-message p {
+	padding: 10px 35px;
+	font-size: 15px;
+	line-height: 0px;
+	height: 0px;
+	margin-left: 40%;
+	margin-right: 40%;
+	width: 50%;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+	color: green;
+}
+
+.valid:before {
+	position: relative;
+	left: -1px;
+	content: "✔";
+}
+
+/* Add a red text color and an "x" icon when the requirements are wrong */
+.invalid {
+	color: red;
+	left: -1px;
+}
+
+.invalid:before {
+	position: relative;
+	left: -1px;
+	content: "✖";
 }

@@ -1,3 +1,5 @@
+//Verify that the password is inserted and it is the same as confirmation box
+
 $('#password, #confirm_password').on('keyup', function() {
 	if ($('#password').val() == $('#confirm_password').val()) {
 		$('#message').html('Matching').css('color', 'green');
@@ -19,5 +21,4 @@ $("#confirm_password").blur(function() {
 		$("#btn-add").prop('disabled', true)//use prop()
 		alert("Password doesn't match!");
 	}
-
 });
