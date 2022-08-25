@@ -34,7 +34,12 @@
 <body>
 	<header>
 		<br>
-		<h1 align="center">Secure Web App</h1>
+		<h1>Secure Web App</h1>
 	</header>
+	
+	<footer>
+	<br>
+	Lorenzo Baldari - Mat. 754416
+	</footer>
 </body>
 </html>

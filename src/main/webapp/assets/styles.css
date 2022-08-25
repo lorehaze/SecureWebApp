@@ -6,7 +6,9 @@ body {
 
 h1 {
 	font-size: 60px;
-	color: #00665C
+	color: #00665C;
+	text-align: center;
+	margin-bottom: 0%;
 }
 
 label {
@@ -16,6 +18,7 @@ label {
 h2 {
 	font-size: 40px;
 	color: white;
+	text-align: center;
 }
 
 h4 {
@@ -32,6 +35,15 @@ h4 {
 	height: 50px;
 }
 
+.custom-2 {
+	font-size: 20px;
+	color: #00665C;
+}
+
+.custom-3 {
+	font-size: 20px;
+}
+
 .table {
 	opacity: 0.8;
 	background: #ffffff;
@@ -40,4 +52,14 @@ h4 {
 	font-style: normal;
 	background-color: transparent;
 	width: auto;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: #00665C;
+  text-align: center;
+  font-size: 15px;
 }

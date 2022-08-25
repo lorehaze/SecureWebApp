@@ -23,9 +23,9 @@
 			</tr>
 			<tr>
 				<td><button type="submit" name="Action" value="Login"
-						class="btn btn-outline-success btn-xs custom-1">Login</button></td>
+						class="btn btn-outline-success btn-xs custom-1 custom-3">Login</button></td>
 				<td><a href="index.jsp"
-					class="btn btn-outline-secondary btn-xs custom-1">Back</a></td>
+					class="btn btn-outline-secondary btn-xs custom-1 custom-3">Back</a></td>
 			</tr>
 		</table>
 	</form>

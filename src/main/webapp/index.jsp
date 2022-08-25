@@ -12,22 +12,22 @@
 
 <body>
 	<div class="col-md-12 text-center">
-		<br>
-		<br>
-		<br>
-		<br>
+		<br> <br> <br> <br>
 		<center>
-			<a href="addUser.jsp" class="btn btn-outline-dark btn-sm custom-1"
-				role="button" aria-disabled="true">Register</a> <br>
+			<a href="addUser.jsp"
+				class="btn btn-outline-dark btn-sm custom-1 custom-2" role="button"
+				aria-disabled="true">Register</a> <br>
 		</center>
 		<br>
 		<center>
-			<a href="login.jsp" class="btn btn-outline-dark btn-sm custom-1"
-				role="button" aria-disabled="true">Login</a>
+			<a href="login.jsp"
+				class="btn btn-outline-dark btn-sm custom-1 custom-2" role="button"
+				aria-disabled="true">Login</a>
 		</center>
 	</div>
 
 	<div class="col-md-12 text-center"></div>
+
 
 </body>
 </html>
