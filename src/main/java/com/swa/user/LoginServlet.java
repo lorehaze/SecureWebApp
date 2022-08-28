@@ -8,6 +8,7 @@ import java.util.Arrays;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -66,6 +67,8 @@ public class LoginServlet extends HttpServlet {
 					dispatcher.include(request, response);
 					printWriter.print("<br><h4>Wrong password. <br><br> Please check your password.</h4>");
 				} else {
+					Cookie ck = new Cookie("email", email);
+					response.addCookie(ck);
 					printWriter.print("<br>User successfully logged in" + " " + "as" + " " + email);
 				}
 			}
