@@ -52,7 +52,6 @@ public class LoginServlet extends HttpServlet {
 			int id_user = 0;
 			boolean result = false;
 			PrintWriter printWriter = response.getWriter();
-
 			user.setEmail((request.getParameter("email")));
 			user.setPassword(request.getParameter("password").getBytes());
 			id_user = dao.getID(user); // getting user ID
@@ -75,4 +74,5 @@ public class LoginServlet extends HttpServlet {
 			Arrays.fill(user.getPassword(), (byte) 0); // empty password array
 		}
 	}
+	
 }
