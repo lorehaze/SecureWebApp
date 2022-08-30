@@ -67,8 +67,10 @@ public class LoginServlet extends HttpServlet {
 					printWriter.print("<br><h4>Wrong password. <br><br> Please check your password.</h4>");
 				} else {
 					Cookie ck = new Cookie("email", email);
+					ck.setMaxAge(300);
 					response.addCookie(ck);
-					printWriter.print("<br>User successfully logged in" + " " + "as" + " " + email);
+					//printWriter.print("<br>User successfully logged in" + " " + "as" + " " + email);
+					response.sendRedirect("profile.jsp");
 				}
 			}
 			Arrays.fill(user.getPassword(), (byte) 0); // empty password array

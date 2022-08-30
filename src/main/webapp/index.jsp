@@ -11,14 +11,20 @@
 </head>
 
 <body>
+	<br>
 	<div class="col-md-12 text-center">
 		<br> <br> <br> <br>
+		<center>
+			<a href="ProfileServlet"
+				class="btn btn-outline-dark btn-sm custom-1 custom-2" role="button"
+				aria-disabled="true">Profile</a> <br>
+		</center>
+	<div class="col-md-12 text-center">
 		<center>
 			<a href="addUser.jsp"
 				class="btn btn-outline-dark btn-sm custom-1 custom-2" role="button"
 				aria-disabled="true">Register</a> <br>
 		</center>
-		<br>
 		<center>
 			<a href="login.jsp"
 				class="btn btn-outline-dark btn-sm custom-1 custom-2" role="button"

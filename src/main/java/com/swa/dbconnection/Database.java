@@ -8,29 +8,6 @@ import java.util.Properties;
 
 import com.mysql.cj.jdbc.DatabaseMetaData;
 
-/*public class Database {
-
-	public static Connection getConn() {
-		String loadDriver = "com.mysql.cj.jdbc.Driver";
-		String dbURL = "jdbc:mysql://localhost:3306/users";
-		String dbUSERNAME = "root";
-		String dbPASSWORD = "toortoor";
-
-		Connection con = null;
-		try {
-			Class.forName(loadDriver);
-			con = DriverManager.getConnection(dbURL, dbUSERNAME, dbPASSWORD);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return con;
-	}
-}*/
-
-////////////////////////////////
-
 public class Database {
 
 	public static Connection getConn() {
