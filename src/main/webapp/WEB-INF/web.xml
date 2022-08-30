@@ -40,7 +40,7 @@
 		<url-pattern>/LoginServlet</url-pattern>
 	</servlet-mapping>
 
-	
+
 	<servlet>
 		<servlet-name>ProfileServlet</servlet-name>
 		<servlet-class>com.swa.user.ProfileServlet</servlet-class>
@@ -50,7 +50,7 @@
 		<servlet-name>ProfileServlet</servlet-name>
 		<url-pattern>/ProfileServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>LogoutServlet</servlet-name>
 		<servlet-class>com.swa.user.LogoutServlet</servlet-class>
@@ -59,6 +59,16 @@
 	<servlet-mapping>
 		<servlet-name>LogoutServlet</servlet-name>
 		<url-pattern>/LogoutServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>UploadServlet</servlet-name>
+		<servlet-class>com.swa.user.UploadServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>UploadServlet</servlet-name>
+		<url-pattern>/UploadServlet</url-pattern>
 	</servlet-mapping>
 
 	<filter>

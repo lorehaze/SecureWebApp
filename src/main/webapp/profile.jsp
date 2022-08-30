@@ -15,15 +15,18 @@
 	<br>
 	<h2>You're currently logged in as: ${cookie['email'].getValue()}</h2>
 
-
-
-	<center>
-		<a href="LogoutServlet"
+	<br>
+	<div class="col-md-12 container">
+		<br> <br> <br> <br> <a href="UploadServlet"
+			class="btn btn-outline-dark btn-sm custom-1 custom-2" role="button"
+			method="get">Upload</a> 
+		<br> <a href=""
+			class="btn btn-outline-dark btn-sm custom-1 custom-2" role="button"
+			aria-disabled="true">Projects</a>
+			<br>
+			<a href="LogoutServlet"
 			class="btn btn-outline-secondary btn-xs custom-1 custom-3">Logout</a>
-	</center>
-	<center>
-		<a href="index.jsp"
-			class="btn btn-outline-secondary btn-xs custom-1 custom-3">Back</a>
-	</center>
+	</div>
+
 </body>
 </html>

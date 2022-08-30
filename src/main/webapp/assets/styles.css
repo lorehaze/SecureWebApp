@@ -52,8 +52,6 @@ h4 {
 	font-size: 20px;
 }
 
-
-
 /* table style */
 .table {
 	opacity: 0.8;
@@ -83,7 +81,6 @@ footer {
 	position: relative;
 	padding: 20px;
 	margin-top: 10px;
-	
 }
 
 #psw-message p {
@@ -117,4 +114,9 @@ footer {
 	position: relative;
 	left: -1px;
 	content: "✖";
+}
+
+.container {
+	display: flex;
+	justify-content: center;
 }
