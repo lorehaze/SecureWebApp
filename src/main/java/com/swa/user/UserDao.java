@@ -8,11 +8,12 @@ import java.util.Arrays;
 
 import com.swa.user.UserBean;
 import com.swa.dbconnection.Database;
+import com.swa.dbconnection.Database;
 
 public class UserDao {
 
 	public boolean addUser(UserBean user) {
-		Connection con = Database.getConn();
+		Connection con = Database.getConn_write();
 		String sql = "INSERT INTO user (user_id,email) values (NULL,?) ";
 		int i = 0;
 		try {
@@ -32,7 +33,7 @@ public class UserDao {
 	public int getID(UserBean user) {
 		int userid = 0;
 
-		Connection con = Database.getConn();
+		Connection con = Database.getConn_read();
 		String search_id_query = "SELECT `user_id` FROM `user` WHERE email = ? ";
 		try {
 			PreparedStatement ps = con.prepareStatement(search_id_query);
@@ -48,7 +49,7 @@ public class UserDao {
 	}
 
 	public boolean insertPassword(UserBean user, int userID) {
-		Connection con = Database.getConn();
+		Connection con = Database.getConn_write();
 		String sql = "INSERT INTO password (pass_id,user_id,password) VALUES (NULL,?,?)";
 		int i = 0;
 		try {
@@ -59,7 +60,7 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		Arrays.fill(user.getPassword(), (byte) 0);	//empty password array
+		Arrays.fill(user.getPassword(), (byte) 0); // empty password array
 
 		if (i == 0) {
 			return false;
@@ -69,7 +70,7 @@ public class UserDao {
 	}
 
 	public boolean login(UserBean user, int userID) {
-		Connection con = Database.getConn();
+		Connection con = Database.getConn_read();
 		int passid = 0;
 
 		String login_query = "SELECT pass_id FROM password WHERE user_id=? AND password=?";
@@ -85,7 +86,7 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		Arrays.fill(user.getPassword(), (byte) 0); //empty password array
+		Arrays.fill(user.getPassword(), (byte) 0); // empty password array
 		if (passid == 0) {
 			return false;
 		} else {
@@ -97,7 +98,7 @@ public class UserDao {
 		boolean isRegistered = false;
 		int user_id, temp_id = 0;
 
-		Connection con = Database.getConn();
+		Connection con = Database.getConn_read();
 
 		String userExists_query = "SELECT user_id FROM user WHERE email=?";
 

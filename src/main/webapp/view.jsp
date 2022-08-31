@@ -12,7 +12,7 @@
 	</tr>
 
 	<%
-	Connection con = Database.getConn();
+	Connection con = Database.getConn_read();
 	Statement statement = con.createStatement();
 	ResultSet resultSet = statement.executeQuery("SELECT * FROM user");
 	while (resultSet.next()) {

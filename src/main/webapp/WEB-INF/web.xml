@@ -61,16 +61,6 @@
 		<url-pattern>/LogoutServlet</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<servlet-name>UploadServlet</servlet-name>
-		<servlet-class>com.swa.user.UploadServlet</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>UploadServlet</servlet-name>
-		<url-pattern>/UploadServlet</url-pattern>
-	</servlet-mapping>
-
 	<filter>
 		<filter-name>Controller</filter-name>
 		<filter-class>com.swa.user.Controller</filter-class>
