@@ -61,6 +61,24 @@
 		<url-pattern>/LogoutServlet</url-pattern>
 	</servlet-mapping>
 
+	<context-param>
+		<description>Location to store uploaded file</description>
+		<param-name>file-upload</param-name>
+		<param-value>
+		/Users/lorenzo/Documents/GitHub/SecureWebApp/src/main/webapp/uploads/images/
+      </param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>ProfilePictureServlet</servlet-name>
+		<servlet-class>com.swa.files.ProfilePictureServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ProfilePictureServlet</servlet-name>
+		<url-pattern>/ProfilePictureServlet</url-pattern>
+	</servlet-mapping>
+
 	<filter>
 		<filter-name>Controller</filter-name>
 		<filter-class>com.swa.user.Controller</filter-class>
