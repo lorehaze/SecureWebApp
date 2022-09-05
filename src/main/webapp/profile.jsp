@@ -18,10 +18,13 @@
 
 	<br>
 
-	<form method="post" action="UploadServlet"
-		enctype="multipart/form-data">
-		Select file to upload: <input type="file" name="uploadFile" /> <br />
-		<br /> <input type="submit" value="Upload" />
-	</form>
+
+	
+	
+	<center>
+			<a href="LogoutServlet"
+				class="btn btn-outline-dark btn-sm custom-1 custom-2" role="button"
+				aria-disabled="true">Log Out</a> <br>
+		</center>
 </body>
 </html>

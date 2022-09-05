@@ -17,18 +17,18 @@
 			<tr>
 				<td><label>Email</label></td>
 				<td><input id="email" type="email" name="email"
-					required="required"></td>
+					required="required" placeholder="Insert your email"></td>
 			</tr>
 			<tr>
 				<td><label>password :</label>
 				<td><input name="password" id="password" type="password"
-					required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" /></td>
+					required="required" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Insert your password" /></td>
 			</tr>
 			<tr>
 				<td><label>confirm password:</label></td>
 				<td><input type="password" name="confirm_password"
 					id="confirm_password" required="required"
-					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" /></td>
+					pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Confirm your password" /></td>
 			</tr>
 			<tr>
 			</tr>

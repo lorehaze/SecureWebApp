@@ -15,11 +15,11 @@
 
 			<tr>
 				<td><label>Email: </label>
-				<td><input type="email" name="email"></td>
+				<td><input type="email" name="email" placeholder="Insert your email"></td>
 			</tr>
 			<tr>
 				<td><label>Password: </label>
-				<td><input name="password" id="password" type="password" /></td>
+				<td><input name="password" id="password" type="password" placeholder="Insert your password" /></td>
 			</tr>
 			<tr>
 				<td><button type="submit" name="Action" value="Login"

@@ -1,6 +1,7 @@
 package com.swa.user;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -32,13 +33,16 @@ public class ProfileServlet extends HttpServlet {
 
 		Cookie ck[] = request.getCookies();
 
-		if (ck != null) {
-			String email = ck[0].getValue();
-			if (email.contains("@")){
+		if (Arrays.stream(ck).anyMatch("email"::equals)) {
+			String email = ck[1].getValue();
+			if (email.contains("@")) {
 				response.sendRedirect("profile.jsp");
 			} else {
 				response.sendRedirect("login.jsp");
 			}
-		} 
+		} else {
+			response.sendRedirect("login.jsp");
+		}
+
 	}
 }

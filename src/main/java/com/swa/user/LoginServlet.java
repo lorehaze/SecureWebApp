@@ -9,6 +9,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class LoginServlet
@@ -30,8 +31,6 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -60,15 +59,20 @@ public class LoginServlet extends HttpServlet {
 					dispatcher.include(request, response);
 					printWriter.print("<br><h4>Wrong password. <br><br> Please check your password.</h4>");
 				} else {
+					HttpSession oldSession = request.getSession(false);
+					if (oldSession != null) { // invalidate old session
+						oldSession.invalidate();
+					}
 					Cookie ck = new Cookie("email", email);
 					ck.setMaxAge(300);
+					ck.setSecure(true);
+					ck.setHttpOnly(true);
 					response.addCookie(ck);
-					//printWriter.print("<br>User successfully logged in" + " " + "as" + " " + email);
 					response.sendRedirect("profile.jsp");
 				}
 			}
 			Arrays.fill(user.getPassword(), (byte) 0); // empty password array
 		}
 	}
-	
+
 }
