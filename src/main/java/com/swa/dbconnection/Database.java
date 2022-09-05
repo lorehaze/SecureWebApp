@@ -78,5 +78,41 @@ public class Database {
 		}
 		return dbConn;
 	}
+	
+	public static Connection getConn_update() {
+		Connection dbConn = null;
+		try {
+			// Create Properties object.
+			Properties props = new Properties();
+
+			String dbSettingsPropertyFile = "/Users/lorenzo/Desktop/keystore/config.properties";
+			// Properties will use a FileReader object as input.
+			FileReader fReader = new FileReader(dbSettingsPropertyFile);
+
+			// Load jdbc related properties in above file.
+			props.load(fReader);
+
+			// Get each property value.
+			String dbDriverClass = props.getProperty("db.driver.class");
+
+			String dbConnUrl = props.getProperty("db.conn.url");
+
+			String dbUserName = props.getProperty("db.update");
+
+			String dbPassword = props.getProperty("db.update.pwd");
+
+			if (!"".equals(dbDriverClass) && !"".equals(dbConnUrl)) {
+				/* Register jdbc driver class. */
+				Class.forName(dbDriverClass);
+
+				// Get database connection object.
+				dbConn = DriverManager.getConnection(dbConnUrl, dbUserName, dbPassword);
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return dbConn;
+	}
 
 }

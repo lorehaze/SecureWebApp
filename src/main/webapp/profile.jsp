@@ -18,7 +18,10 @@
 
 	<br>
 
-
+ <form action="ProfileUpload" method="post" enctype="multipart/form-data">
+ 	   <input type="file" placeholder="Upload your profile photo" name="photo">
+ 	    <button type="submit" >Submit</button>
+ </form>
 	
 	
 	<center>
