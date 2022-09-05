@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <jsp:include page="assets/scripts.jsp" />
 <link rel="stylesheet" href="assets/styles.css">
+<meta http-equiv="refresh" content="${pageContext.session.maxInactiveInterval};url=login.jsp">
 </head>
 <body>
 

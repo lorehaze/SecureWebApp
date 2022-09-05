@@ -5,9 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
-
-import com.swa.user.UserBean;
-import com.swa.dbconnection.Database;
 import com.swa.dbconnection.Database;
 
 public class UserDao {
@@ -96,7 +93,7 @@ public class UserDao {
 
 	public boolean userAlredyRegistered(UserBean user) {
 		boolean isRegistered = false;
-		int user_id, temp_id = 0;
+		int temp_id = 0;
 
 		Connection con = Database.getConn_read();
 
@@ -117,7 +114,6 @@ public class UserDao {
 		}
 
 		if (temp_id != 0) {
-			user_id = temp_id;
 			isRegistered = true;
 		}
 
