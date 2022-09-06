@@ -56,10 +56,11 @@ public class PictureUploadServlet extends HttpServlet {
 		if (request.getParameter("Action").equals("UploadPicture")) {
 
 			Cookie[] cookies = request.getCookies();
-			boolean sanityCheck = false;
+
 			SessionManagement sessionman = new SessionManagement();
+
 			boolean flag = sessionman.CheckSession(cookies);
-			
+
 			if (flag == true) {
 				response.sendRedirect("upload.jsp");
 			} else {

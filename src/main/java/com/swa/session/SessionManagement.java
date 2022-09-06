@@ -60,7 +60,6 @@ public class SessionManagement {
 					}
 				}
 			}
-
 		}
 		return isValidated;
 	}

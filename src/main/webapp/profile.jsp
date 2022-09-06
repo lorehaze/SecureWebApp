@@ -23,10 +23,17 @@
 	<table class="table table-borderless" align="center" cellpadding="5">
 
 		<tr>
-			<td><button href="PictureUploadServlet" type="submit"
+			<!-- 	<td><button a href="PictureUploadServlet" type="submit"
 					name="Action" value="UploadPicture"
 					class="btn btn-outline-dark btn-xs custom-1 custom-3">
-					Profile Picture</button></td>
+					Profile Picture</button></td>-->
+			<form action="PictureUploadServlet" method="post">
+				<td><input type="submit" name="Action" value="UploadPicture"
+					value="Upload Picture"
+					class="btn btn-outline-dark btn-sm custom-1 custom-3" role="button">
+				</td>
+			</form>
+
 		</tr>
 
 		<tr>
@@ -43,11 +50,9 @@
 		<tr>
 			<td>
 				<form action="LogoutServlet" method="post">
-					<center>
-						<input type="submit" value="Logout"
-							class="btn btn-outline-dark btn-sm custom-1 custom-2"
-							role="button">
-					</center>
+					<input type="submit" value="Logout"
+						class="btn btn-outline-dark btn-sm custom-1 custom-2"
+						role="button">
 				</form>
 			<td>
 		</tr>
