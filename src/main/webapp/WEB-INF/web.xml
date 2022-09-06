@@ -70,6 +70,16 @@
 		<servlet-name>ProfileUpload</servlet-name>
 		<url-pattern>/ProfileUpload</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>PictureUploadServlet</servlet-name>
+		<servlet-class>com.swa.files.PictureUploadServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PictureUploadServlet</servlet-name>
+		<url-pattern>/PictureUploadServlet</url-pattern>
+	</servlet-mapping>
 
 	<filter>
 		<filter-name>Controller</filter-name>

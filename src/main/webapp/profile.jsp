@@ -23,21 +23,22 @@
 	<table class="table table-borderless" align="center" cellpadding="5">
 
 		<tr>
-			<td><button type="submit" name="Action" value="UploadPicture"
+			<td><button href="PictureUploadServlet" type="submit"
+					name="Action" value="UploadPicture"
 					class="btn btn-outline-dark btn-xs custom-1 custom-3">
 					Profile Picture</button></td>
 		</tr>
 
 		<tr>
 			<td><button type="submit" name="Action" value="UploadProject"
-					class="btn btn-outline-dark btn-xs custom-1 custom-3">
-					New Project</button></td>
+					class="btn btn-outline-dark btn-xs custom-1 custom-3">New
+					Project</button></td>
 		</tr>
 
 		<tr>
 			<td><button type="submit" name="Action" value="ShowAll"
-					class="btn btn-outline-dark btn-xs custom-1 custom-3">
-					All Projects</button></td>
+					class="btn btn-outline-dark btn-xs custom-1 custom-3">All
+					Projects</button></td>
 		</tr>
 		<tr>
 			<td>

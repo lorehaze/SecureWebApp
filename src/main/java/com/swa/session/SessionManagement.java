@@ -1,8 +1,13 @@
 package com.swa.session;
 
+import java.io.IOException;
+import java.net.http.HttpResponse;
+
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 import com.swa.crypt.AES;
+import com.swa.session.SessionManagement;
 
 public class SessionManagement {
 
@@ -25,5 +30,38 @@ public class SessionManagement {
 		sessionToken = cypher.encrypt(temp_sessionToken, key);
 
 		return sessionToken;
+	}
+
+	public boolean CheckSession(Cookie[] cookies) throws IOException {
+
+		AES cypher = new AES();
+		boolean isValidated = false;
+		String email = null;
+		String sessionToken = null;
+		HttpServletResponse response = null;
+
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("email")) {
+					email = cookie.getValue();
+				}
+				if (cookie.getName().equals("sessionToken")) {
+					sessionToken = cookie.getValue();
+				}
+			}
+
+			if (email != null) {
+				if (sessionToken != null) {
+					String temp = cypher.decrypt(sessionToken, email);
+					String cmprEmail = email.substring(0, 4);
+					String cmprSessionToken = temp.substring(temp.length() - 4);
+					if (cmprEmail.equals(cmprSessionToken)) {
+						isValidated = true;
+					}
+				}
+			}
+
+		}
+		return isValidated;
 	}
 }

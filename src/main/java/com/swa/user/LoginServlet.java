@@ -66,34 +66,28 @@ public class LoginServlet extends HttpServlet {
 					SessionManagement token = new SessionManagement();
 
 					Cookie ck_email = new Cookie("email", email);
-					Cookie ck_flag = new Cookie("rememberMe", rememberMe);
 					String sessionToken = token.SessionToken(email); // session key
 					Cookie ck_key = new Cookie("sessionToken", sessionToken);
 					ck_email.setHttpOnly(true);
-					ck_flag.setHttpOnly(true);
 					ck_key.setHttpOnly(true);
 					ck_email.setSecure(true);
-					ck_flag.setSecure(true);
 					ck_key.setSecure(true);
 
 					if (rememberMe != null) {
 						// set never expire
 						ck_email.setMaxAge(-1);
-						ck_flag.setMaxAge(-1);
 						ck_key.setMaxAge(-1);
 					} else {
 						// set token expires
 						ck_email.setMaxAge(30 * 60);
-						ck_flag.setMaxAge(30 * 60);
 						ck_key.setMaxAge(30 * 60);
 					}
 
 					// add to response
 					response.addCookie(ck_email);
-					response.addCookie(ck_flag);
 					response.addCookie(ck_key);
 
-					//response.sendRedirect("profile.jsp");
+					// response.sendRedirect("profile.jsp");
 					response.sendRedirect("ProfileServlet");
 				}
 			}
