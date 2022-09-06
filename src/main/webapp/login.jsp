@@ -8,18 +8,28 @@
 <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-<br><br>
+	<br>
+	<br>
 	<form action="LoginServlet" method="post">
-		<table class="table table-borderless" align="center"
-			cellpadding="5">
+		<table class="table table-borderless" align="center" cellpadding="5">
 
 			<tr>
 				<td><label>Email: </label>
-				<td><input type="email" name="email" placeholder="Insert your email"></td>
+				<td><input type="email" name="email"
+					placeholder="Insert your email"></td>
 			</tr>
 			<tr>
 				<td><label>Password: </label>
-				<td><input name="password" id="password" type="password" placeholder="Insert your password" /></td>
+				<td><input name="password" id="password" type="password"
+					placeholder="Insert your password" /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><div class="form-check form-switch">
+						<input class="form-check-input" type="checkbox"
+							id="flexSwitchCheckChecked" name="rememberme"> <label
+							class="form-check-label" for="flexSwitchCheckChecked">Remember me</label>
+					</div></td>
 			</tr>
 			<tr>
 				<td><button type="submit" name="Action" value="Login"
@@ -27,6 +37,7 @@
 				<td><a href="index.jsp"
 					class="btn btn-outline-secondary btn-xs custom-1 custom-3">Back</a></td>
 			</tr>
+
 		</table>
 	</form>
 </body>

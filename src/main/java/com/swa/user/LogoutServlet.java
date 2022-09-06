@@ -2,12 +2,14 @@ package com.swa.user;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class LogoutServlet
@@ -27,19 +29,18 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Cookie ck[] = request.getCookies();
-
-		if (Arrays.stream(ck).anyMatch("email"::equals)) {
-			String email = ck[1].getValue();
-			if (email.contains("@")) {
-				response.sendRedirect("profile.jsp");
-			} else {
-				response.sendRedirect("login.jsp");
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals(request.getSession().getAttribute("email"))) {
+					System.out.println(request.getSession().getAttribute("email") + cookie.getValue());
+				}
+				cookie.setMaxAge(0);
+				response.addCookie(cookie);
 			}
-		} else {
-			response.sendRedirect("login.jsp");
 		}
+		response.sendRedirect("login.jsp");
 	}
 }

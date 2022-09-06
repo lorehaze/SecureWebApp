@@ -6,7 +6,8 @@
 <meta charset="UTF-8">
 <jsp:include page="assets/scripts.jsp" />
 <link rel="stylesheet" href="assets/styles.css">
-<meta http-equiv="refresh" content="${pageContext.session.maxInactiveInterval};url=login.jsp">
+<meta http-equiv="refresh"
+	content="${pageContext.session.maxInactiveInterval};url=login.jsp">
 </head>
 <body>
 
@@ -18,16 +19,21 @@
 
 	<br>
 
- <form action="ProfileUpload" method="post" enctype="multipart/form-data">
- 	   <input type="file" placeholder="Upload your profile photo" name="photo">
- 	    <button type="submit" >Submit</button>
- </form>
-	
-	
-	<center>
+	<form action="ProfileUpload" method="post"
+		enctype="multipart/form-data">
+		<input type="file" placeholder="Upload your profile photo"
+			name="photo">
+		<button type="submit">Submit</button>
+	</form>
+
+
+	<!-- <center>
 			<a href="LogoutServlet"
 				class="btn btn-outline-dark btn-sm custom-1 custom-2" role="button"
 				aria-disabled="true">Log Out</a> <br>
-		</center>
+		</center> -->
+
+	<form action="LogoutServlet" method="post">
+		<input type="submit" value="Logout">
 </body>
 </html>

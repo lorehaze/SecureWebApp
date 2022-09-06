@@ -9,7 +9,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import com.swa.session.SessionManagement;
 
 /**
  * Servlet implementation class LoginServlet
@@ -47,6 +47,8 @@ public class LoginServlet extends HttpServlet {
 			PrintWriter printWriter = response.getWriter();
 			user.setEmail((request.getParameter("email")));
 			user.setPassword(request.getParameter("password").getBytes());
+			String rememberMe = request.getParameter("rememberme");
+			System.out.println(rememberMe);
 			id_user = dao.getID(user); // getting user ID
 
 			if (id_user == 0) {
@@ -59,15 +61,37 @@ public class LoginServlet extends HttpServlet {
 					dispatcher.include(request, response);
 					printWriter.print("<br><h4>Wrong password. <br><br> Please check your password.</h4>");
 				} else {
-					HttpSession oldSession = request.getSession(false);
-					if (oldSession != null) { // invalidate old session
-						oldSession.invalidate();
+
+					SessionManagement token = new SessionManagement();
+
+					Cookie ck_email = new Cookie("email", email);
+					Cookie ck_flag = new Cookie("isLogged", "true");
+					String sessionToken = token.SessionToken(email); // session key
+					Cookie ck_key = new Cookie("sessionToken", sessionToken);
+					ck_email.setHttpOnly(true);
+					ck_flag.setHttpOnly(true);
+					ck_key.setHttpOnly(true);
+					ck_email.setSecure(true);
+					ck_flag.setSecure(true);
+					ck_key.setSecure(true);
+
+					if (rememberMe.equals("on")) {
+						// set never expire
+						ck_email.setMaxAge(-1);
+						ck_flag.setMaxAge(-1);
+						ck_key.setMaxAge(-1);
+					} else {
+						// set token expires
+						ck_email.setMaxAge(30 * 60);
+						ck_flag.setMaxAge(30 * 60);
+						ck_key.setMaxAge(30 * 60);
 					}
-					Cookie ck = new Cookie("email", email);
-					ck.setMaxAge(300);
-					ck.setSecure(true);
-					ck.setHttpOnly(true);
-					response.addCookie(ck);
+
+					// add to response
+					response.addCookie(ck_email);
+					response.addCookie(ck_flag);
+					response.addCookie(ck_key);
+
 					response.sendRedirect("profile.jsp");
 				}
 			}
