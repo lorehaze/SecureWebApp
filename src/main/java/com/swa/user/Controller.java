@@ -33,6 +33,12 @@ public class Controller implements Filter {
 	    if (request.getParameter("Action").equals("Login"))
 		      // pass the request along the filter chain
 		      chain.doFilter(request, response);
+	    if (request.getParameter("Action").equals("UploadPicture"))
+	    	chain.doFilter(request, response);
+	    if (request.getParameter("Action").equals("UploadProject"))
+	    	chain.doFilter(request, response);
+	    if (request.getParameter("Action").equals("ShowAll"))
+	    	chain.doFilter(request, response);
 	  }
 	  /**
 	   * @see Filter#init(FilterConfig)

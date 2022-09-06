@@ -40,7 +40,7 @@ public class ProfileServlet extends HttpServlet {
 		 * response.sendRedirect("login.jsp"); } } else {
 		 * response.sendRedirect("login.jsp"); }
 		 */
-		response.setContentType("text/html");
+		/*response.setContentType("text/html");
 		Cookie ck[] = request.getCookies();
 		String email=null;
 		if (ck != null) {
@@ -50,6 +50,7 @@ public class ProfileServlet extends HttpServlet {
 			} else {
 				response.sendRedirect("login.jsp");
 			}
-		}
+		}*/
+		response.sendRedirect("profile.jsp");
 	}
 }

@@ -38,6 +38,7 @@ public class LogoutServlet extends HttpServlet {
 					System.out.println(request.getSession().getAttribute("email") + cookie.getValue());
 				}
 				cookie.setMaxAge(0);
+				cookie.setValue("");
 				response.addCookie(cookie);
 			}
 		}

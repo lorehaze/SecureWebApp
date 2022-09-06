@@ -56,6 +56,7 @@ public class LoginServlet extends HttpServlet {
 			} else {
 				String email = user.getEmail();
 				result = dao.login(user, id_user);
+				Arrays.fill(user.getPassword(), (byte) 0); // empty password array
 				if (result == false) {
 					RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 					dispatcher.include(request, response);
@@ -65,7 +66,7 @@ public class LoginServlet extends HttpServlet {
 					SessionManagement token = new SessionManagement();
 
 					Cookie ck_email = new Cookie("email", email);
-					Cookie ck_flag = new Cookie("isLogged", "true");
+					Cookie ck_flag = new Cookie("rememberMe", rememberMe);
 					String sessionToken = token.SessionToken(email); // session key
 					Cookie ck_key = new Cookie("sessionToken", sessionToken);
 					ck_email.setHttpOnly(true);
@@ -75,7 +76,7 @@ public class LoginServlet extends HttpServlet {
 					ck_flag.setSecure(true);
 					ck_key.setSecure(true);
 
-					if (rememberMe.equals("on")) {
+					if (rememberMe != null) {
 						// set never expire
 						ck_email.setMaxAge(-1);
 						ck_flag.setMaxAge(-1);
@@ -92,10 +93,10 @@ public class LoginServlet extends HttpServlet {
 					response.addCookie(ck_flag);
 					response.addCookie(ck_key);
 
-					response.sendRedirect("profile.jsp");
+					//response.sendRedirect("profile.jsp");
+					response.sendRedirect("ProfileServlet");
 				}
 			}
-			Arrays.fill(user.getPassword(), (byte) 0); // empty password array
 		}
 	}
 
