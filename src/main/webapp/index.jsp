@@ -11,18 +11,29 @@
 </head>
 
 <body>
-	<br><br><br><br><br><br><br><br><br><br>
-	
-	<div class="col-md-12 text-center">
-		<center>
-			<a href="addUser.jsp"
-				class="btn btn-outline-dark btn-sm custom-1 custom-2" role="button">Register</a> <br>
-		</center>
-		<center>
-			<a href="login.jsp"
-				class="btn btn-outline-success btn-sm custom-1 custom-2" role="button">Login</a>
-		</center>
-	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<table class="table table-borderless" align="center" cellpadding="5">
+		<tr>
+			<td><a href="login.jsp"
+				class="btn btn-outline-success btn-sm custom-1 custom-2"
+				role="button">Login</a></td>
+		</tr>
+		<tr>
+			<td><a href="addUser.jsp"
+				class="btn btn-outline-dark btn-sm custom-1 custom-2" role="button">Register</a>
+				<br></td>
+		</tr>
+	</table>
 
 </body>
 </html>

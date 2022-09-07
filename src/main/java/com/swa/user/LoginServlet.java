@@ -82,7 +82,8 @@ public class LoginServlet extends HttpServlet {
 						ck_email.setMaxAge(30 * 60);
 						ck_key.setMaxAge(30 * 60);
 					}
-
+					
+					
 					// add to response
 					response.addCookie(ck_email);
 					response.addCookie(ck_key);
