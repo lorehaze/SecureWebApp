@@ -3,11 +3,18 @@ package com.swa.crypt;
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Random;
+
+import com.swa.dbconnection.Database;
 
 public class PasswordHash { // this class uses salt + sha256 for the encoding
 
-	private void clearArray(byte[] toClean) {
+	public void clearArray(byte[] toClean) {
 		for (int i = 0; i < toClean.length; i++) {
 			toClean[i] = 0;
 		}
@@ -17,7 +24,6 @@ public class PasswordHash { // this class uses salt + sha256 for the encoding
 		Random rd = new Random();
 		byte[] salt = new byte[7];
 		rd.nextBytes(salt);
-		System.out.println(salt);
 		return salt;
 	}
 
@@ -29,6 +35,84 @@ public class PasswordHash { // this class uses salt + sha256 for the encoding
 		byte[] combined = buff.array();
 		return combined;
 	}
-	
-	
+
+	public boolean dbSalt(byte[] salt, int userID) {
+		Connection con = Database.getConn_write();
+
+		String sql = "INSERT INTO salt (salt_id,user_id,hash) VALUES (NULL,?,?)";
+
+		int i = 0;
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, userID);
+			ps.setBytes(2, salt);
+			i = ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		clearArray(salt);
+		if (i == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public byte[] saltPassword(byte[] pwd, int userID) {
+
+		byte[] salt = generateSalt(pwd.length);
+		byte[] temp = appendArrays(pwd, salt);
+
+		byte[] hashVal = null;
+		boolean flag = false;
+
+		MessageDigest msgDigest;
+		try {
+			if (flag == true) {
+				flag = dbSalt(salt, userID);
+				msgDigest = MessageDigest.getInstance("SHA-256");
+				hashVal = msgDigest.digest(temp);
+			}
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return hashVal;
+	}
+
+	public byte[] salter(byte[] pwd, byte[] salt) {
+		byte[] salted = null;
+
+		byte[] temp = appendArrays(pwd, salt);
+
+		MessageDigest msgDigest;
+
+		try {
+			msgDigest = MessageDigest.getInstance("SHA-256");
+			salted = msgDigest.digest(temp);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return salted;
+	}
+
+	public byte[] getSalt(int userID) {
+		byte[] salt = null;
+
+		Connection con = Database.getConn_read();
+
+		String sql = "SELECT `hash` FROM `salt` WHERE user_id = ?";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, userID);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				salt = rs.getBytes(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return salt;
+	}
+
 }

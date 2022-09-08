@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 				} else {
 
 					SessionManagement token = new SessionManagement();
-
+					response.setContentType("text/html");
 					Cookie ck_email = new Cookie("email", email);
 					String sessionToken = token.SessionToken(email); // session key
 					Cookie ck_key = new Cookie("sessionToken", sessionToken);
@@ -82,8 +82,7 @@ public class LoginServlet extends HttpServlet {
 						ck_email.setMaxAge(30 * 60);
 						ck_key.setMaxAge(30 * 60);
 					}
-					
-					
+
 					// add to response
 					response.addCookie(ck_email);
 					response.addCookie(ck_key);

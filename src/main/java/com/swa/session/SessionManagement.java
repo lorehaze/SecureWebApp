@@ -38,7 +38,6 @@ public class SessionManagement {
 		boolean isValidated = false;
 		String email = null;
 		String sessionToken = null;
-		HttpServletResponse response = null;
 
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
@@ -62,5 +61,18 @@ public class SessionManagement {
 			}
 		}
 		return isValidated;
+	}
+
+	public String retrieveEmail(Cookie[] cookies) {
+		String email = null;
+
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("email")) {
+					email = cookie.getValue();
+				}
+			}
+		}
+		return email;
 	}
 }

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 import com.swa.dbconnection.Database;
+import com.swa.crypt.PasswordHash;
 
 public class UserDao {
 
@@ -45,14 +46,17 @@ public class UserDao {
 		return userid;
 	}
 
-	public boolean insertPassword(UserBean user, int userID) {
+	public boolean insertPassword(UserBean user, int userID) throws Exception {
 		Connection con = Database.getConn_write();
+		PasswordHash pwd = new PasswordHash();
+		byte[] salt = pwd.saltPassword(user.getPassword(), userID);
+		System.out.println("Salt UseDao: " + salt);
 		String sql = "INSERT INTO password (pass_id,user_id,password) VALUES (NULL,?,?)";
 		int i = 0;
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, userID);
-			ps.setBytes(2, user.getPassword());
+			ps.setBytes(2, salt);
 			i = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -66,29 +70,52 @@ public class UserDao {
 		}
 	}
 
-	public boolean login(UserBean user, int userID) {
+	public byte[] retrieveSalted(int userID) {
 		Connection con = Database.getConn_read();
-		int passid = 0;
-
-		String login_query = "SELECT pass_id FROM password WHERE user_id=? AND password=?";
+		String sql = "SELECT password FROM password WHERE user_id=?";
+		byte[] hash = null;
 
 		try {
-			PreparedStatement ps = con.prepareStatement(login_query);
+			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, userID);
-			ps.setBytes(2, user.getPassword());
 			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				passid = rs.getInt(1);
+
+			if (rs != null) {
+				if (rs.next()) {
+					hash = rs.getBytes(1);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		Arrays.fill(user.getPassword(), (byte) 0); // empty password array
-		if (passid == 0) {
-			return false;
+		return hash;
+	}
+
+	public boolean login(UserBean user, int userID) {
+		int isLogged;
+
+		PasswordHash pwd = new PasswordHash();
+
+		byte[] salt = pwd.getSalt(userID);
+		byte[] pass = user.getPassword();
+		byte[] temp = pwd.salter(pass, salt);
+		pwd.clearArray(salt);
+		pwd.clearArray(pass);
+
+		byte[] saltedPwd = retrieveSalted(userID);
+
+		if (Arrays.equals(temp, saltedPwd)) {
+			isLogged = 1;
 		} else {
-			return true;
+			isLogged = 0;
 		}
+
+		if (isLogged == 1) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 	public boolean userAlredyRegistered(UserBean user) {

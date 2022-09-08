@@ -59,20 +59,5 @@
 	</table>
 
 
-	<br>
-	<br>
-	<br>
-	<br>
-
-	<form action="ProfileUpload" method="post"
-		enctype="multipart/form-data">
-		<center>
-			<input type="file" placeholder="Upload your profile photo"
-				name="photo">
-			<button type="submit">Submit</button>
-		</center>
-	</form>
-
-
 </body>
 </html>

@@ -20,7 +20,6 @@ public class ProfileServlet extends HttpServlet {
 	 */
 	public ProfileServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -31,6 +30,7 @@ public class ProfileServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		Cookie[] cookies = request.getCookies();
+		response.setContentType("text/html");
 
 		SessionManagement sessionman = new SessionManagement();
 

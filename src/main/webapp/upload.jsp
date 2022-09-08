@@ -1,4 +1,4 @@
-+<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,21 +19,28 @@
 
 	<br>
 	<br>
-
-	<br>
-	<br>
-	<br>
-	<br>
-
+	<!-- 
 	<form action="ProfileUpload" method="post"
 		enctype="multipart/form-data">
 		<center>
 			<input type="file" placeholder="Upload your profile photo"
-				name="photo">
-			<button type="submit">Submit</button>
+				name="photo" >
+			<button type="submit" class="btn btn-outline-dark btn-xs custom-1 custom-3">Submit</button>
 		</center>
 	</form>
-
-
+-->
+	<form action="ProfileUpload" method="post"
+		enctype="multipart/form-data">
+		<div class="mb-3">
+			<label for="formFile" class="form-label">Upload your profile
+				picture: </label> <input class="form-control" type="file" name="photo"
+				id="formFile"> <br> <br>
+			<button type="submit"
+				class="btn btn-outline-dark btn-xs custom-1 custom-3 mb-3">Submit</button>
+			<a href="profile.jsp"
+					class="btn btn-outline-secondary btn-xs custom-1 custom-3 mb-3">Back</a></td>
+			</td>
+		</div>
+	</form>
 </body>
 </html>
