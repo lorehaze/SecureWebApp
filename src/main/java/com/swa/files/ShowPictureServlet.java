@@ -38,11 +38,13 @@ public class ShowPictureServlet extends HttpServlet {
 		response.setContentType("image/jpeg");
 		int id = Integer.parseInt(request.getParameter("user_id"));
 		Connection conn = Database.getConn_read();
-		//String sql = "SELECT * FROM 'user' WHERE user_id =" + id + "'";
-		String sql = "SELECT profile_photo FROM user WHERE user_id = 1";
+		//String sql = "SELECT profile_photo FROM user WHERE user_id =" + id + "'";
+		String sql = "SELECT profile_photo FROM user WHERE user_id = ?";
+		//String sql = "SELECT profile_photo FROM user WHERE user_id = 1";
 		PreparedStatement ps;
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				byte[] imageData = rs.getBytes("profile_photo"); // extract byte data from the resultset..
