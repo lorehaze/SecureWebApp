@@ -61,21 +61,26 @@ public class PasswordHash { // this class uses salt + sha256 for the encoding
 	public byte[] saltPassword(byte[] pwd, int userID) {
 
 		byte[] salt = generateSalt(pwd.length);
+		System.out.println("SALT: "+salt);
 		byte[] temp = appendArrays(pwd, salt);
+		System.out.println("APPEND ARRAY: " +temp);
 
+		
 		byte[] hashVal = null;
 		boolean flag = false;
-
+		flag = dbSalt(salt, userID);
+		System.out.println(flag);
 		MessageDigest msgDigest;
 		try {
 			if (flag == true) {
-				flag = dbSalt(salt, userID);
+				
 				msgDigest = MessageDigest.getInstance("SHA-256");
 				hashVal = msgDigest.digest(temp);
 			}
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
+		System.out.println("HASHVAL: " + hashVal);
 		return hashVal;
 	}
 

@@ -25,9 +25,7 @@
 	<h2>You're currently logged in as: ${cookie['email'].getValue()}</h2>
 
 	<br>
-	<br>
 
-	<tbody>
 		<%
 		Cookie[] cookies = request.getCookies();
 		
@@ -42,17 +40,12 @@
 		ResultSet rs = ps.executeQuery();
 		if (rs.next()) {
 		%>
-
-
-		<tr>
-			<th scope="row"><%=rs.getInt(1)%></th>
-			<td><img src=ShowPictureServlet?user_id=<%=rs.getInt(1)%>
-				alt="image not found" width="100px" height="100px"></td>
-		</tr>
+	
+			<img src=ShowPictureServlet?user_id=<%=rs.getInt(1)%>
+				alt="image not found" width="100px" height="100px" class="img-profile">
 		<%
 		}
 		%>
-	</tbody>
 
 
 
