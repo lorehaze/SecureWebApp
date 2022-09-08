@@ -19,16 +19,7 @@
 
 	<br>
 	<br>
-	<!-- 
-	<form action="ProfileUpload" method="post"
-		enctype="multipart/form-data">
-		<center>
-			<input type="file" placeholder="Upload your profile photo"
-				name="photo" >
-			<button type="submit" class="btn btn-outline-dark btn-xs custom-1 custom-3">Submit</button>
-		</center>
-	</form>
--->
+
 	<form action="ProfileUpload" method="post"
 		enctype="multipart/form-data">
 		<div class="mb-3">
@@ -38,8 +29,7 @@
 			<button type="submit"
 				class="btn btn-outline-dark btn-xs custom-1 custom-3 mb-3">Submit</button>
 			<a href="profile.jsp"
-					class="btn btn-outline-secondary btn-xs custom-1 custom-3 mb-3">Back</a></td>
-			</td>
+				class="btn btn-outline-secondary btn-xs custom-1 custom-3 mb-3">Back</a>
 		</div>
 	</form>
 </body>

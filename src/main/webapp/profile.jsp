@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,12 @@
 <link rel="stylesheet" href="assets/styles.css">
 <meta http-equiv="refresh"
 	content="${pageContext.session.maxInactiveInterval};url=login.jsp">
+<%@page import="java.sql.Connection"%>
+<%@page import="com.swa.dbconnection.Database"%>
+<%@page import="java.sql.PreparedStatement" %>
+<%@page import="java.sql.ResultSet" %>
+<%@page import="java.sql.SQLException"%>
+<%@page import="com.swa.session.SessionManagement" %>;
 </head>
 <body>
 
@@ -19,6 +26,35 @@
 
 	<br>
 	<br>
+
+	<tbody>
+		<%
+		Cookie[] cookies = request.getCookies();
+		
+		SessionManagement sessionman = new SessionManagement();
+		
+		String email = sessionman.retrieveEmail(cookies);
+		
+		Connection conn = Database.getConn_read();
+		String sql = "SELECT * FROM user where email=?";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1,email);
+		ResultSet rs = ps.executeQuery();
+		if (rs.next()) {
+		%>
+
+
+		<tr>
+			<th scope="row"><%=rs.getInt(1)%></th>
+			<td><img src=ShowPictureServlet?user_id=<%=rs.getInt(1)%>
+				alt="image not found" width="100px" height="100px"></td>
+		</tr>
+		<%
+		}
+		%>
+	</tbody>
+
+
 
 	<table class="table table-borderless" align="center" cellpadding="5">
 

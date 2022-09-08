@@ -60,7 +60,7 @@
 		<servlet-name>LogoutServlet</servlet-name>
 		<url-pattern>/LogoutServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ProfileUpload</servlet-name>
 		<servlet-class>com.swa.files.ProfileUpload</servlet-class>
@@ -70,7 +70,7 @@
 		<servlet-name>ProfileUpload</servlet-name>
 		<url-pattern>/ProfileUpload</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>PictureUploadServlet</servlet-name>
 		<servlet-class>com.swa.files.PictureUploadServlet</servlet-class>
@@ -79,6 +79,16 @@
 	<servlet-mapping>
 		<servlet-name>PictureUploadServlet</servlet-name>
 		<url-pattern>/PictureUploadServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ShowPictureServlet</servlet-name>
+		<servlet-class>com.swa.files.ShowPictureServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ShowPictureServlet</servlet-name>
+		<url-pattern>/ShowPictureServlet</url-pattern>
 	</servlet-mapping>
 
 	<filter>
