@@ -90,6 +90,15 @@
 		<servlet-name>ShowPictureServlet</servlet-name>
 		<url-pattern>/ShowPictureServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>ProjectUploadServlet</servlet-name>
+		<servlet-class>com.swa.files.ProjectUploadServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ProjectUploadServlet</servlet-name>
+		<url-pattern>/ProjectUploadServlet</url-pattern>
+	</servlet-mapping>
 
 	<filter>
 		<filter-name>Controller</filter-name>

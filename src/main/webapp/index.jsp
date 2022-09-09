@@ -18,9 +18,6 @@
 	<br>
 	<br>
 	<br>
-	<br>
-	<br>
-	<br>
 
 	<table class="table table-borderless" align="center" cellpadding="5">
 		<tr>

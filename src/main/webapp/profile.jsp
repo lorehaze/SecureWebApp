@@ -58,7 +58,6 @@
 					Profile Picture</button></td>-->
 			<form action="PictureUploadServlet" method="post">
 				<td><input type="submit" name="Action" value="UploadPicture"
-					value="Upload Picture"
 					class="btn btn-outline-dark btn-sm custom-1 custom-3" role="button">
 				</td>
 			</form>
@@ -66,9 +65,12 @@
 		</tr>
 
 		<tr>
-			<td><button type="submit" name="Action" value="UploadProject"
+			<!-- <td><button projectUpload.jsp" type="submit" name="Action" value="UploadProject" 
 					class="btn btn-outline-dark btn-xs custom-1 custom-3">New
-					Project</button></td>
+					Project</button></td> -->
+					<td><a href="projectUpload.jsp"
+				class="btn btn-outline-dark btn-sm custom-1 custom-3"
+				role="button" value="UploadProject">New Project</a></td>
 		</tr>
 
 		<tr>

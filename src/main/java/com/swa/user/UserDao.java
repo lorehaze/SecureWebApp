@@ -50,9 +50,9 @@ public class UserDao {
 		Connection con = Database.getConn_write();
 		PasswordHash pwd = new PasswordHash();
 		byte[] notSalted = user.getPassword();
-		System.out.println("not salted:" + notSalted);
+		//System.out.println("not salted:" + notSalted);
 		byte[] salt = pwd.saltPassword(notSalted, userID);
-		System.out.println("Salt UseDao: " + salt);
+		//System.out.println("Salt UseDao: " + salt);
 		String sql = "INSERT INTO password (pass_id,user_id,password) VALUES (NULL,?,?)";
 		int i = 0;
 		try {

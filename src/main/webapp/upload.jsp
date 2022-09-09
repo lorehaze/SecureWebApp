@@ -24,11 +24,14 @@
 		enctype="multipart/form-data">
 		<div class="mb-3">
 			<label for="formFile" class="form-label">Upload your profile
-				picture: </label> <input class="form-control" type="file" name="photo"
-				id="formFile"> <br> <br>
+				picture: </label> <br> <input class="form-control" type="file"
+				name="photo" id="formFile" accept=".jpg,.jpeg,.png,.gif"> <br>
+			<br>
+			<br>
+			<br>
 			<button type="submit"
 				class="btn btn-outline-dark btn-xs custom-1 custom-3 mb-3">Submit</button>
-			<a href="profile.jsp"
+			<a href="ProfileServlet"
 				class="btn btn-outline-secondary btn-xs custom-1 custom-3 mb-3">Back</a>
 		</div>
 	</form>
