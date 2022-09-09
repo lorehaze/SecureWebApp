@@ -15,7 +15,7 @@
 
 			<tr>
 				<td><label>Email: </label>
-				<td><input type="email" name="email"
+				<td><input type="email" name="email" id="email"
 					placeholder="Insert your email"></td>
 			</tr>
 			<tr>
@@ -28,7 +28,8 @@
 				<td><div class="form-check form-switch">
 						<input class="form-check-input" type="checkbox"
 							id="flexSwitchCheckChecked" name="rememberme"> <label
-							class="form-check-label" for="flexSwitchCheckChecked">Remember me</label>
+							class="form-check-label" for="flexSwitchCheckChecked">Remember
+							me</label>
 					</div></td>
 			</tr>
 			<tr>
@@ -40,5 +41,21 @@
 
 		</table>
 	</form>
+
+	<script>
+		$(document).ready(function() {
+			$('button[type="submit"]').attr('disabled', true);
+			$('input[type="email"],input[type="password"]').on('keyup', function() {
+				var email_value = $("#email").val();
+				var pwd_value = $('#password').val();
+				if (email_value != '' && pwd_value != '') {
+					$('button[type="submit"]').attr('disabled', false);
+				} else {
+					$('button[type="submit"]').attr('disabled', true);
+				}
+			});
+		});
+	</script>
+
 </body>
 </html>

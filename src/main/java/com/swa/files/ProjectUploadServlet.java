@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import com.swa.session.SessionManagement;
+import com.swa.files.ContentExtraction;
 
 /**
  * Servlet implementation class ProjectUploadServlet
@@ -35,7 +36,7 @@ public class ProjectUploadServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
-	 */ 
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -50,46 +51,22 @@ public class ProjectUploadServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		Cookie[] cookies = request.getCookies();
-
 		SessionManagement sessionman = new SessionManagement();
-
 		boolean flag = sessionman.CheckSession(cookies);
 
 		if (flag == true) {
-
+			//get file
+			String contentType = "text/plain";
 			Part filePart = request.getPart("fileToUpload");
 			InputStream fileInputStream = filePart.getInputStream();
-			File fileToSave = new File("/Users/lorenzo/Documents/GitHub/SecureWebApp/src/main/webapp/uploads/"
-					+ filePart.getSubmittedFileName());
+			//start verifying
+			ContentExtraction checker = new ContentExtraction();
+			checker.FileChecker(fileInputStream, contentType); //check if filetype is correct
+			File fileToSave = new File(UPLOAD_DIRECTORY + filePart.getSubmittedFileName());
 			Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-			response.sendRedirect("upload.jsp");
+			response.sendRedirect("profile.jsp");
 		} else {
 			response.sendRedirect("login.jsp");
 		}
-
-		// get the file chosen by the user
-		// Part filePart = request.getPart("fileToUpload");
-
-		// get the InputStream to store the file somewhere
-
-		// for example, you can copy the uploaded file to the server
-		// note that you probably don't want to do this in real life!
-		// upload it to a file host like S3 or GCS instead
-
-		// get the URL of the uploaded file
-		// String fileUrl = "http://localhost:8080/uploaded-files/" +
-		// filePart.getSubmittedFileName();
-
-		// You can get other form data too
-		// String name = request.getParameter("name");
-
-		// create output HTML that uses the
-		// response.getOutputStream().println("<p>Thanks " + name + "! Here's a link to
-		// your uploaded file:</p>");
-		// response.getOutputStream().println("<p><a href=\"" + fileUrl + "\">" +
-		// fileUrl + "</a></p>");
-		// response.getOutputStream().println("<p>Upload another file <a
-		// href=\"http://localhost:8080/index.html\">here</a>.</p>");
 	}
 }
