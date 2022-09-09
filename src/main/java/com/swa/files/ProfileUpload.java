@@ -56,7 +56,7 @@ public class ProfileUpload extends HttpServlet {
 
 			user.setEmail(email);
 
-			System.out.println("email: " + user.getEmail());
+			//System.out.println("email: " + user.getEmail());
 
 			UserDao dao = new UserDao();
 
@@ -65,9 +65,9 @@ public class ProfileUpload extends HttpServlet {
 			InputStream inputStream = null;// input stream of uploaded file
 			Part part = request.getPart("photo");
 			if (part != null) {
-				System.out.println(part.getName());
-				System.out.println(part.getSize());
-				System.out.println(part.getContentType());
+				//System.out.println(part.getName());
+				//System.out.println(part.getSize());
+				//System.out.println(part.getContentType());
 				inputStream = part.getInputStream();
 			}
 			// Now Create a connection and send it to DB...
