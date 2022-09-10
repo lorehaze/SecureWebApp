@@ -32,6 +32,18 @@ h4 {
 	text-align: center;
 }
 
+h5 {
+	font-size: 30px;
+	color: #22FF00;
+	text-align: center;
+}
+
+h6 {
+	font-size: 30px;
+	color: #FF0000;
+	text-align: center;
+}
+
 /* button style */
 .custom-1 {
 	display: flex;

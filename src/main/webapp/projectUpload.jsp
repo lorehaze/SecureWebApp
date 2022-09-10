@@ -18,7 +18,7 @@
 		enctype="multipart/form-data">
 		<div class="mb-3">
 			<label for="formFile" class="form-label text-center">Upload your project
-				proposal in txt format: </label> <input class="form-control" type="file"
+				proposal in txt format under 2MB: </label> <input class="form-control" type="file"
 				name="fileToUpload" accept=".txt"> <br> <br>
 			<button type="submit"
 				class="btn btn-outline-dark btn-xs custom-1 custom-3 mb-3">Submit</button>

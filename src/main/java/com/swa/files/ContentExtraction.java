@@ -1,11 +1,21 @@
 package com.swa.files;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.io.IOUtils;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.AutoDetectParser;
 import org.apache.tika.parser.ParseContext;
@@ -15,28 +25,12 @@ import org.apache.tika.sax.BodyContentHandler;
 public class ContentExtraction {
 
 	// regex inject value to find
-	public static final String REGEX_FILE_CONTENT = "(<script>|<\\/script>|\\.jsp|\\?[a-zA-Z]+=)";
+	private static final String REGEX_FILE_CONTENT = "b\\ciao1\\b";
 
-//	public static void printMetadata(String filename) throws IOException, TikaException, Exception {
-//		long start = System.currentTimeMillis();
-//		BodyContentHandler handler = new BodyContentHandler();
-//		Metadata metadata = new Metadata();
-//		FileInputStream content = new FileInputStream(filename);
-//		Parser parser = new AutoDetectParser();
-//		try {
-//			parser.parse(content, handler, metadata, new ParseContext());
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		for (String name : metadata.names()) {
-//			System.out.println(name + ":\t" + metadata.get(name));
-//		}
-//		System.out.println("...extracting file..." + (System.currentTimeMillis() - start));
-//	}
-/////////////////////////////////////////////////////////
-
-	public void FileChecker(InputStream file, String ContentType) throws IOException {
-		boolean flagType, flagRegex = false;
+	public boolean FileChecker(InputStream file, String ContentType) throws IOException {
+		boolean flagSecure = false;
+		boolean flagType = false;
+		boolean flagRegex = false;
 		long start = System.currentTimeMillis();
 		BodyContentHandler handler = new BodyContentHandler();
 		Metadata metadata = new Metadata();
@@ -46,51 +40,81 @@ public class ContentExtraction {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		for (String name : metadata.names()) {
-			System.out.println(name + ":\t" + metadata.get(name));
-		}
-
 		switch (ContentType) {
 		case "text/plain":
 			flagType = ctypeChecker(metadata, ContentType);
-			if (flagType = false) {
-				flagRegex = regexChecker(file);
-			} 
-			System.out.println(flagType);
-			System.out.println(flagRegex);
+			// flagRegex = regexChecker(file);
+//			System.out.println("IS TAMPERED: " + flagType);
+//			System.out.println("IS INJECTED: " + flagRegex);
+//			System.out.println("IS SECURE: " + flagSecure);
 		}
-		System.out.println("Elapsed time: " + (System.currentTimeMillis() - start));
+
+		// System.out.println("Elapsed time: " + (System.currentTimeMillis() - start));
+		return flagSecure;
 	}
 
-	private final boolean regexChecker(InputStream file) throws IOException {
-		boolean isInjected = true;
+	public final boolean regexChecker(String path) throws IOException {
+		boolean isInjected = false;
 
-		if (file != null) {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(file));
+		System.out.println("RECEIVED PATH: " + path);
 
-			while (reader.ready()) { // if buffer is ready
-				String lines = reader.readLine();
-				Pattern regex = Pattern.compile(REGEX_FILE_CONTENT);
-				Matcher match = regex.matcher(lines);
-				if (match.find())
-					isInjected = true;
+//		Check if file comes to function
+//		boolean debug = true;
+//
+//		if (file != null) {
+//			debug = false;
+//		}
+//		System.out.println("FILE NOT CAME TO REGEX: " + debug);
+
+		path = "/Users/lorenzo/Documents/GitHub/SecureWebApp/src/main/webapp/uploads/testo.txt";
+
+		BufferedReader br = new BufferedReader(new FileReader(path, StandardCharsets.UTF_8));
+		// BufferedReader br = new BufferedReader(new InputStreamReader(file,
+		// StandardCharsets.UTF_8));
+		try {
+			StringBuilder sb = new StringBuilder();
+			String line = br.readLine();
+
+			// while (line != null) {
+			while ((line = br.readLine()) != null) {
+				sb.append(line);
+				sb.append(System.lineSeparator());
+				line = br.readLine();
 			}
-			reader.close();
+			String everything = sb.toString();
+			System.out.println("CIAOOOOO: " + everything);
+		} finally {
+			br.close();
 		}
+
 		return isInjected;
 	}
 
+	/// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
+	/// /// /// ///
+	/*
+	 * private final boolean regexChecker(InputStream file) throws IOException {
+	 * boolean isInjected = false;
+	 * 
+	 * if (file != null) { // BufferedReader reader = new BufferedReader(new
+	 * InputStreamReader(file)); BufferedReader reader = new BufferedReader(new
+	 * InputStreamReader(file)); while (reader.ready()) { // if buffer is ready
+	 * String lines = reader.readLine(); System.out.println("LINES: " + lines);
+	 * Pattern regex = Pattern.compile(REGEX_FILE_CONTENT,Pattern.CASE_INSENSITIVE);
+	 * Matcher match = regex.matcher(lines); if (match.find()) isInjected = true; //
+	 * file is injected } reader.close(); } return isInjected; }
+	 */
+	/// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// /// ///
+	/// /// /// ///
 	private final boolean ctypeChecker(Metadata metadata, String contentType) {
-		boolean isTampered = true;
+		boolean isTampered = false;
 		String toCheck = null;
 		if (metadata != null) {
-			toCheck = metadata.get(metadata.CONTENT_TYPE);
+			toCheck = metadata.get(metadata.CONTENT_TYPE); // get file content type
 		}
-		if (toCheck.contains(contentType)) {
-			isTampered = false;
-		} else {
-			isTampered = true;
+		System.out.println(toCheck);
+		if (!toCheck.contains(contentType)) {
+			isTampered = true; // file is tampered
 		}
 		return isTampered;
 	}
