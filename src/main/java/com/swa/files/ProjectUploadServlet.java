@@ -53,19 +53,20 @@ public class ProjectUploadServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		Cookie[] cookies = request.getCookies();
 		SessionManagement sessionman = new SessionManagement();
 		boolean flag = sessionman.CheckSession(cookies);
-
+		String path = null;
+		ContentExtraction checker = new ContentExtraction();
 		if (flag == true) {
 			PrintWriter printWriter = response.getWriter();
 			RequestDispatcher dispatcher = request.getRequestDispatcher("projectUpload.jsp");
 			Part filePart = request.getPart("fileToUpload");
 			InputStream fileInputStream = filePart.getInputStream();
 			int fileInputStreamSize = fileInputStream.available(); // get file size
-			if (fileInputStreamSize <= maxSize) {
+			if (fileInputStreamSize <= maxSize) { // check on size
 				File fileToSave = new File(UPLOAD_DIRECTORY + filePart.getSubmittedFileName());
+				path = fileToSave.toPath().toString();
 				Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
 				dispatcher.include(request, response);
 				printWriter.print("<br><h5>File successfully uploaded!<h5>");
@@ -78,6 +79,5 @@ public class ProjectUploadServlet extends HttpServlet {
 		} else {
 			response.sendRedirect("login.jsp");
 		}
-
 	}
 }
