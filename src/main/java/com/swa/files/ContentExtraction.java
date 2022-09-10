@@ -24,8 +24,8 @@ import org.apache.tika.sax.BodyContentHandler;
 
 public class ContentExtraction {
 
-	public static final String REGEX_FILE_CONTENT_PATTERN = "(<script>|<\\/script>|\\.jsp|\\?[a-zA-Z]+=)"; // regex
-																											// pattern
+	// regex pattern against LFI/XSS (escaped and unescaped)/SQLi
+	public static final String REGEX_FILE_CONTENT_PATTERN = "(<script>|<\\/script>|\\.jsp|\\?[a-zA-Z]+=)";
 
 	public boolean FileChecker(InputStream file, String ContentType) throws IOException {
 
@@ -67,7 +67,10 @@ public class ContentExtraction {
 				}
 			}
 		}
-		System.out.println(isInjected);
+		
+		if (isInjected = true) {
+			file.delete();
+		}		
 		return isInjected;
 	}
 

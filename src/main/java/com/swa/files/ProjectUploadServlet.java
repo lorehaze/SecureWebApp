@@ -72,7 +72,14 @@ public class ProjectUploadServlet extends HttpServlet {
 				///////////////			EDITS			///////////////
 
 				
-				boolean isRead = checker.regexChecker(fileToSave);
+				boolean isHijacked = checker.regexChecker(fileToSave);
+				
+				if (isHijacked = true) {
+					dispatcher.include(request, response);
+					printWriter.print("<br><h6>File did not pass security verifications and was deleted! <h6>");
+				} else {
+					
+				}
 				
 				
 				
