@@ -23,9 +23,12 @@ import org.apache.tika.parser.Parser;
 import org.apache.tika.sax.BodyContentHandler;
 
 public class ContentExtraction {
-	private static final String REGEX_FILE_CONTENT = "b\\ciao1\\b"; // regex inject value to find
+
+	public static final String REGEX_FILE_CONTENT_PATTERN = "(<script>|<\\/script>|\\.jsp|\\?[a-zA-Z]+=)"; // regex
+																											// pattern
 
 	public boolean FileChecker(InputStream file, String ContentType) throws IOException {
+
 		boolean flagSecure = false;
 		boolean flagType = false;
 		boolean flagRegex = false;
@@ -43,6 +46,29 @@ public class ContentExtraction {
 			flagType = ctypeChecker(metadata, ContentType);
 		}
 		return flagSecure;
+	}
+
+	public final boolean regexChecker(File file) throws IOException {
+		boolean isInjected = false;
+
+		BufferedReader buff = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8));
+
+		String strCurrentLine = null;
+
+		// check if file reaches function
+		if (buff != null) {
+			Pattern pattern = Pattern.compile(REGEX_FILE_CONTENT_PATTERN);
+			// here i can read lines
+			while ((strCurrentLine = buff.readLine()) != null) {
+				System.out.println(strCurrentLine); // PRINT CURRENT LINE
+				Matcher matcher = pattern.matcher(strCurrentLine);
+				if (matcher.find()) {
+					isInjected = true;
+				}
+			}
+		}
+		System.out.println(isInjected);
+		return isInjected;
 	}
 
 	private final boolean ctypeChecker(Metadata metadata, String contentType) {

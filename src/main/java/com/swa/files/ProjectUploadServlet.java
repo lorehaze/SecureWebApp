@@ -68,6 +68,16 @@ public class ProjectUploadServlet extends HttpServlet {
 				File fileToSave = new File(UPLOAD_DIRECTORY + filePart.getSubmittedFileName());
 				path = fileToSave.toPath().toString();
 				Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
+				
+				///////////////			EDITS			///////////////
+
+				
+				boolean isRead = checker.regexChecker(fileToSave);
+				
+				
+				
+				
+				///////////////			EDITS			///////////////
 				dispatcher.include(request, response);
 				printWriter.print("<br><h5>File successfully uploaded!<h5>");
 			} else {
