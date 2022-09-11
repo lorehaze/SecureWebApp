@@ -2,9 +2,12 @@ package com.swa.files;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.Cookie;
@@ -48,26 +51,35 @@ public class ProfileUpload extends HttpServlet {
 		String email = null;
 
 		if (flag == true) {
+			PrintWriter printWriter = response.getWriter();
+			RequestDispatcher dispatcher = request.getRequestDispatcher("upload.jsp");
+			ContentExtraction checker = new ContentExtraction();
+			int maxFileSize = 1048576;
 			email = sessionman.retrieveEmail(cookies);
-
 			UserBean user = new UserBean();
-
 			user.setEmail(email);
-
-			//System.out.println("email: " + user.getEmail());
-
 			UserDao dao = new UserDao();
-
 			int user_id = dao.getID(user);
-
 			InputStream inputStream = null;// input stream of uploaded file
 			Part part = request.getPart("photo");
 			if (part != null) {
-				//System.out.println(part.getName());
-				//System.out.println(part.getSize());
-				//System.out.println(part.getContentType());
-				inputStream = part.getInputStream();
+				
+				if (part.getSize() <= maxFileSize) {
+					System.out.println("OK");
+					inputStream = part.getInputStream();
+					String contentType="image/";
+					boolean isTampered = checker.FileChecker(inputStream, contentType);
+					System.out.println("TAMPER CHEcK: " + isTampered);
+				} else {
+					dispatcher.include(request, response);
+					printWriter.print("<br><h6>File exceed the maximum size!</h6>");	
+				}
+			}else {
+				dispatcher.include(request, response);
+				printWriter.print("<br><h6>File is empty!</h6>");	
 			}
+			
+			///////// IF CLAUSE!!!!
 			// Now Create a connection and send it to DB...
 			Connection conn = Database.getConn_update();
 			// String sql = "INSERT INTO user (profile_photo) VALUES (?) WHERE user_id = 1";

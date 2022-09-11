@@ -24,7 +24,7 @@
 		enctype="multipart/form-data">
 		<div class="mb-3">
 			<label for="formFile" class="form-label text-center">Upload your profile
-				picture: </label> <br> <input class="form-control" type="file"
+				picture under 1MB: </label> <br> <input class="form-control" type="file"
 				name="photo" id="formFile" accept=".jpg,.jpeg,.png,.gif"> <br>
 			<br> <br> <br>
 			<button type="submit"

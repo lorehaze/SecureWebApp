@@ -34,6 +34,11 @@ public class ContentExtraction {
 		switch (ContentType) {
 		case "text/plain":
 			flagType = ctypeChecker(metadata, ContentType);
+			System.out.println("TAMPER CHECK: " + flagType);
+			break;
+		case "image/":
+			flagType = ctypeChecker(metadata, ContentType);
+			break;
 		}
 		return flagType;
 	}
