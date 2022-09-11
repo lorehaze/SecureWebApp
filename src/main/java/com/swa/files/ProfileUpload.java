@@ -63,23 +63,31 @@ public class ProfileUpload extends HttpServlet {
 			InputStream inputStream = null;// input stream of uploaded file
 			Part part = request.getPart("photo");
 			if (part != null) {
-				
+
 				if (part.getSize() <= maxFileSize) {
 					System.out.println("OK");
 					inputStream = part.getInputStream();
-					String contentType="image/";
-					boolean isTampered = checker.FileChecker(inputStream, contentType);
+					String contentType = "image/";
+					boolean isTampered = false;
+					//boolean isTampered = checker.FileChecker(inputStream, contentType);
 					System.out.println("TAMPER CHEcK: " + isTampered);
+
+					if (!isTampered) {
+						
+					} else {
+						//inputStream.close();
+						dispatcher.include(request, response);
+						printWriter.print("<br><h6>File is tampered and was deleted!</h6>");
+					}
+
 				} else {
 					dispatcher.include(request, response);
-					printWriter.print("<br><h6>File exceed the maximum size!</h6>");	
+					printWriter.print("<br><h6>File exceed the maximum size!</h6>");
 				}
-			}else {
+			} else {
 				dispatcher.include(request, response);
-				printWriter.print("<br><h6>File is empty!</h6>");	
+				printWriter.print("<br><h6>File is empty!</h6>");
 			}
-			
-			///////// IF CLAUSE!!!!
 			// Now Create a connection and send it to DB...
 			Connection conn = Database.getConn_update();
 			// String sql = "INSERT INTO user (profile_photo) VALUES (?) WHERE user_id = 1";
