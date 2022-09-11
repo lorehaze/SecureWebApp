@@ -57,44 +57,36 @@ public class ProjectUploadServlet extends HttpServlet {
 		SessionManagement sessionman = new SessionManagement();
 		boolean flag = sessionman.CheckSession(cookies);
 		String path = null;
-		ContentExtraction checker = new ContentExtraction();
 		if (flag == true) {
+			String contentType = "text/plain";
+			ContentExtraction checker = new ContentExtraction();
 			PrintWriter printWriter = response.getWriter();
 			RequestDispatcher dispatcher = request.getRequestDispatcher("projectUpload.jsp");
 			Part filePart = request.getPart("fileToUpload");
 			InputStream fileInputStream = filePart.getInputStream();
 			int fileInputStreamSize = fileInputStream.available(); // get file size
 			if (fileInputStreamSize <= maxSize) { // check on size
-				File fileToSave = new File(UPLOAD_DIRECTORY + filePart.getSubmittedFileName());
-				path = fileToSave.toPath().toString();
-				Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
+				boolean isTampered = checker.FileChecker(fileInputStream, contentType);
+				System.out.println("IS IT TAMPERED?: " + isTampered);
+				if (!isTampered) {
+					File fileToSave = new File(UPLOAD_DIRECTORY + filePart.getSubmittedFileName());
+					path = fileToSave.toPath().toString();
+					Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
+					boolean isHijacked = checker.fileVerify(fileToSave);
+					if (isHijacked) {
+						fileToSave.delete();
+						dispatcher.include(request, response);
+						printWriter.print("<br><h6>File did not pass security checks and was deleted!<h6>");
+					} else {
+						dispatcher.include(request, response);
+						printWriter.print("<br><h5>File successfully uploaded!<h5>");
+					}
 
-				/////////////// EDITS ///////////////
-				boolean isHijacked = checker.fileVerify(fileToSave);
-				// if (isHijacked = true) {
-				// dispatcher.include(request, response);
-				// printWriter.print("<br><h6>File did not pass security verifications and was
-				// deleted! <h6>");
-				// }
-
-				System.out.println("SEc CHECKS: " + isHijacked);
-
-				if (isHijacked) {
-					fileToSave.delete();
-					dispatcher.include(request, response);
-					printWriter.print("<br><h6>File did not pass security checks and was deleted!<h6>");
 				} else {
+					fileInputStream.close();
 					dispatcher.include(request, response);
-					printWriter.print("<br><h5>File successfully uploaded!<h5>");
+					printWriter.print("<br><h6>File is tampered and was deleted!<h6>");
 				}
-
-				/*
-				 * if (isHijacked = true) { dispatcher.include(request, response); printWriter.
-				 * print("<br><h6>File did not pass security checks and was deleted!<h6>"); }
-				 * else { dispatcher.include(request, response);
-				 * printWriter.print("<br><h5>File successfully uploaded!<h5>"); }
-				 */
-				/////////////// EDITS ///////////////
 			} else { // if file size is under max
 				fileInputStream.close();
 				dispatcher.include(request, response);
