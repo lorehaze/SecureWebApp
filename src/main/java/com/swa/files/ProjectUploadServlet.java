@@ -68,32 +68,40 @@ public class ProjectUploadServlet extends HttpServlet {
 				File fileToSave = new File(UPLOAD_DIRECTORY + filePart.getSubmittedFileName());
 				path = fileToSave.toPath().toString();
 				Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
-				
-				///////////////			EDITS			///////////////
 
-				
-				boolean isHijacked = checker.regexChecker(fileToSave);
-				
-				if (isHijacked = true) {
+				/////////////// EDITS ///////////////
+				boolean isHijacked = checker.fileVerify(fileToSave);
+				// if (isHijacked = true) {
+				// dispatcher.include(request, response);
+				// printWriter.print("<br><h6>File did not pass security verifications and was
+				// deleted! <h6>");
+				// }
+
+				System.out.println("SEc CHECKS: " + isHijacked);
+
+				if (isHijacked) {
+					fileToSave.delete();
 					dispatcher.include(request, response);
-					printWriter.print("<br><h6>File did not pass security verifications and was deleted! <h6>");
+					printWriter.print("<br><h6>File did not pass security checks and was deleted!<h6>");
 				} else {
-					
+					dispatcher.include(request, response);
+					printWriter.print("<br><h5>File successfully uploaded!<h5>");
 				}
-				
-				
-				
-				
-				///////////////			EDITS			///////////////
-				dispatcher.include(request, response);
-				printWriter.print("<br><h5>File successfully uploaded!<h5>");
-			} else {
+
+				/*
+				 * if (isHijacked = true) { dispatcher.include(request, response); printWriter.
+				 * print("<br><h6>File did not pass security checks and was deleted!<h6>"); }
+				 * else { dispatcher.include(request, response);
+				 * printWriter.print("<br><h5>File successfully uploaded!<h5>"); }
+				 */
+				/////////////// EDITS ///////////////
+			} else { // if file size is under max
 				fileInputStream.close();
 				dispatcher.include(request, response);
 				printWriter.print("<br><h6>File exceed the maximum size!</h6>");
 			}
 
-		} else {
+		} else { // else if flag == false
 			response.sendRedirect("login.jsp");
 		}
 	}
