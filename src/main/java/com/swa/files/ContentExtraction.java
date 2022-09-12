@@ -15,7 +15,6 @@ import org.apache.tika.parser.ParseContext;
 import org.apache.tika.parser.Parser;
 import org.apache.tika.sax.BodyContentHandler;
 
-
 public class ContentExtraction {
 
 	// regex pattern against LFI/XSS (escaped and unescaped)/SQLi
@@ -56,7 +55,6 @@ public class ContentExtraction {
 		}
 	}
 
-
 	private final boolean regexChecker(File file) throws IOException {
 		boolean isInjected = false;
 		BufferedReader buff = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8));
@@ -75,6 +73,7 @@ public class ContentExtraction {
 				isInjected = matcher.find();
 			} // end while
 		}
+		buff.close();
 		System.out.println("IS THIS FILE INJECTED? : " + isInjected);
 		return isInjected;
 	}
