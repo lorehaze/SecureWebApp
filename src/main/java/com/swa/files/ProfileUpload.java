@@ -1,5 +1,6 @@
 package com.swa.files;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -63,13 +64,13 @@ public class ProfileUpload extends HttpServlet {
 			InputStream inputStream = null;// input stream of uploaded file
 			Part part = request.getPart("photo");
 			if (part != null) {
-
+				InputStream fileInputStream = part.getInputStream();
 				if (part.getSize() <= maxFileSize) {
+					BufferedInputStream buffStream = new BufferedInputStream(part.getInputStream());
 					inputStream = part.getInputStream();
 					String contentType = "image/";
 					boolean isTampered = false;
-					isTampered = checker.FileChecker(inputStream, contentType);
-
+					isTampered = checker.FileChecker(buffStream, contentType);
 					if (!isTampered) {
 						// Now Create a connection and send it to DB...
 						Connection conn = Database.getConn_update();
