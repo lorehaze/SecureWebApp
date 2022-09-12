@@ -72,8 +72,7 @@ public class ContentExtraction {
 				System.out.println("CURRENT LINE: " + strCurrentLine); // PRINT CURRENT LINE
 				Matcher matcher = pattern.matcher(strCurrentLine);
 				// System.out.println("MATCH: " + matcher.find());
-				//isInjected = matcher.find();
-				isInjected &= matcher.find();
+				isInjected = matcher.find();
 			} // end while
 		}
 		System.out.println("IS THIS FILE INJECTED? : " + isInjected);
