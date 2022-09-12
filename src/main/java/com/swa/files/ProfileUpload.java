@@ -65,22 +65,37 @@ public class ProfileUpload extends HttpServlet {
 			if (part != null) {
 
 				if (part.getSize() <= maxFileSize) {
-					System.out.println("OK");
 					inputStream = part.getInputStream();
 					String contentType = "image/";
 					boolean isTampered = false;
-					//boolean isTampered = checker.FileChecker(inputStream, contentType);
-					System.out.println("TAMPER CHEcK: " + isTampered);
+					isTampered = checker.FileChecker(inputStream, contentType);
 
 					if (!isTampered) {
-						
+						// Now Create a connection and send it to DB...
+						Connection conn = Database.getConn_update();
+						// String sql = "INSERT INTO user (profile_photo) VALUES (?) WHERE user_id = 1";
+						String sql = "UPDATE user SET profile_photo = ? WHERE user_id = ?";
+						try {
+							PreparedStatement ps = conn.prepareStatement(sql);
+							ps.setBlob(1, inputStream);
+							ps.setInt(2, user_id);
+							int i = ps.executeUpdate();
+							System.out.println(i);
+							if (i > 0) {
+								request.setAttribute("success", "Picture Added Successfully");
+								request.getRequestDispatcher("profile.jsp").forward(request, response);
+							}
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					} else {
-						//inputStream.close();
+						// inputStream.close();
 						dispatcher.include(request, response);
 						printWriter.print("<br><h6>File is tampered and was deleted!</h6>");
 					}
 
-				} else {
+				} else { // photo is bigger than maxSize
 					dispatcher.include(request, response);
 					printWriter.print("<br><h6>File exceed the maximum size!</h6>");
 				}
@@ -88,24 +103,7 @@ public class ProfileUpload extends HttpServlet {
 				dispatcher.include(request, response);
 				printWriter.print("<br><h6>File is empty!</h6>");
 			}
-			// Now Create a connection and send it to DB...
-			Connection conn = Database.getConn_update();
-			// String sql = "INSERT INTO user (profile_photo) VALUES (?) WHERE user_id = 1";
-			String sql = "UPDATE user SET profile_photo = ? WHERE user_id = ?";
-			try {
-				PreparedStatement ps = conn.prepareStatement(sql);
-				ps.setBlob(1, inputStream);
-				ps.setInt(2, user_id);
-				int i = ps.executeUpdate();
-				System.out.println(i);
-				if (i > 0) {
-					request.setAttribute("success", "Picture Added Successfully");
-					request.getRequestDispatcher("profile.jsp").forward(request, response);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
 		} else {
 			response.sendRedirect("index.jsp");
 		}

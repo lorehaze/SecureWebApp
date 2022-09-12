@@ -1,5 +1,6 @@
 package com.swa.files;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,13 +66,15 @@ public class ProjectUploadServlet extends HttpServlet {
 			Part filePart = request.getPart("fileToUpload");
 			InputStream fileInputStream = filePart.getInputStream();
 			int fileInputStreamSize = fileInputStream.available(); // get file size
+			BufferedInputStream buffStream = new BufferedInputStream(filePart.getInputStream());
 			if (fileInputStreamSize <= maxSize) { // check on size
-				boolean isTampered = checker.FileChecker(fileInputStream, contentType);
+				boolean isTampered = checker.FileChecker(buffStream, contentType);
 				System.out.println("IS IT TAMPERED?: " + isTampered);
 				if (!isTampered) {
+					//System.out.println("IS INPUT STREAM AVAILABLE? " + fileInputStream.available());
 					File fileToSave = new File(UPLOAD_DIRECTORY + filePart.getSubmittedFileName());
-					path = fileToSave.toPath().toString();
 					Files.copy(fileInputStream, fileToSave.toPath(), StandardCopyOption.REPLACE_EXISTING);
+					System.out.println("FILE SIZE: " + fileToSave.length());
 					boolean isHijacked = checker.fileVerify(fileToSave);
 					if (isHijacked) {
 						fileToSave.delete();
