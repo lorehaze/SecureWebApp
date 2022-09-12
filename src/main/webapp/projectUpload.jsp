@@ -21,11 +21,13 @@
 				proposal in txt format under 2MB: </label> <input class="form-control" type="file"
 				name="fileToUpload" accept=".txt"> <br> <br>
 			<button type="submit"
-				class="btn btn-outline-dark btn-xs custom-1 custom-3 mb-3">Submit</button>
+				class="btn btn-outline-dark btn-xs custom-1 custom-3 mb-3" disabled>Submit</button>
 			<a href="ProfileServlet"
 				class="btn btn-outline-secondary btn-xs custom-1 custom-3 mb-3">Back</a>
 		</div>
 	</form>
+
+	<script src="assets/js/inputValidator.js"></script>
 
 
 </body>

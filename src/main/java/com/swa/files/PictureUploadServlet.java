@@ -1,6 +1,9 @@
 package com.swa.files;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -29,21 +32,6 @@ public class PictureUploadServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		if (request.getParameter("Action").equals("UploadPicture")) {
-
-			Cookie[] cookies = request.getCookies();
-
-			SessionManagement sessionman = new SessionManagement();
-
-			boolean flag = sessionman.CheckSession(cookies);
-
-			if (flag == true) {
-				response.sendRedirect("profile.jsp");
-			} else {
-				response.sendRedirect("login.jsp");
-			}
-		}
 	}
 
 	/**
@@ -59,11 +47,14 @@ public class PictureUploadServlet extends HttpServlet {
 			SessionManagement sessionman = new SessionManagement();
 
 			boolean flag = sessionman.CheckSession(cookies);
+			PrintWriter printWriter = response.getWriter();
 
 			if (flag == true) {
 				response.sendRedirect("upload.jsp");
 			} else {
-				response.sendRedirect("login.jsp");
+				RequestDispatcher errDispatcher = request.getRequestDispatcher("login.jsp");
+				errDispatcher.include(request, response);
+				printWriter.print("<br><h6>Session has expired.<br>Please, login now!</h6>");
 			}
 		}
 	}

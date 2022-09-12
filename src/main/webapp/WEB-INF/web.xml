@@ -100,6 +100,16 @@
 		<url-pattern>/ProjectUploadServlet</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>ShowProjectsServlet</servlet-name>
+		<servlet-class>com.swa.files.ShowProjectsServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ShowProjectsServlet</servlet-name>
+		<url-pattern>/ShowProjectsServlet</url-pattern>
+	</servlet-mapping>
+
 	<filter>
 		<filter-name>Controller</filter-name>
 		<filter-class>com.swa.user.Controller</filter-class>

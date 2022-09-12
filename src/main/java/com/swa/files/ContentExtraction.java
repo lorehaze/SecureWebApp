@@ -19,7 +19,7 @@ public class ContentExtraction {
 
 	// regex pattern against LFI/XSS (escaped and unescaped)/SQLi
 	public static final String REGEX_FILE_CONTENT_PATTERN = "(<script>|<\\/script>|\\.jsp|\\?[a-zA-Z]+=)";
-	//public static final String REGEX_FILE_CONTENT_PATTERN = "<script>";
+	// public static final String REGEX_FILE_CONTENT_PATTERN = "<script>";
 
 	public boolean FileChecker(InputStream file, String ContentType) throws IOException {
 		BufferedInputStream buffStream = new BufferedInputStream(file);
@@ -66,7 +66,7 @@ public class ContentExtraction {
 			Pattern pattern = Pattern.compile(REGEX_FILE_CONTENT_PATTERN, Pattern.DOTALL);
 
 			// here i can read lines
-			while ((strCurrentLine = buff.readLine()) != null) { // start while
+			while ((strCurrentLine = buff.readLine()) != null && !isInjected) {
 				System.out.println("CURRENT LINE: " + strCurrentLine); // PRINT CURRENT LINE
 				Matcher matcher = pattern.matcher(strCurrentLine);
 				// System.out.println("MATCH: " + matcher.find());

@@ -1,0 +1,10 @@
+ciao
+questo è il mio primo progetto in java
+e questo per mostrare che sono in grado di leggere
+un file anche da una directory interna.
+Cio' è stato possibile grazie al setup del file
+server.xml di Tomcat ed al mio URLBuilder, una classe
+che ho scritto per generare degli URL dinamici, indicizzati
+sulla base del nome assegnato al file.
+
+Lorenzo Baldari

@@ -50,9 +50,9 @@ public class ProfileUpload extends HttpServlet {
 
 		boolean flag = sessionman.CheckSession(cookies);
 		String email = null;
+		PrintWriter printWriter = response.getWriter();
 
 		if (flag == true) {
-			PrintWriter printWriter = response.getWriter();
 			RequestDispatcher dispatcher = request.getRequestDispatcher("upload.jsp");
 			ContentExtraction checker = new ContentExtraction();
 			int maxFileSize = 1048576;
@@ -83,8 +83,8 @@ public class ProfileUpload extends HttpServlet {
 							int i = ps.executeUpdate();
 							System.out.println(i);
 							if (i > 0) {
-								request.setAttribute("success", "Picture Added Successfully");
-								request.getRequestDispatcher("profile.jsp").forward(request, response);
+								dispatcher.include(request, response);
+								printWriter.print("<br><h5>Profile is updated succesfully!</h5>");
 							}
 						} catch (SQLException e) {
 							// TODO Auto-generated catch block
@@ -106,7 +106,8 @@ public class ProfileUpload extends HttpServlet {
 			}
 
 		} else {
-			response.sendRedirect("index.jsp");
-		}
+			RequestDispatcher errDispatcher = request.getRequestDispatcher("login.jsp");
+			errDispatcher.include(request, response);
+			printWriter.print("<br><h6>Session has expired.<br>Please, login now!</h6>");		}
 	}
 }

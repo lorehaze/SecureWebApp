@@ -57,11 +57,10 @@ public class ProjectUploadServlet extends HttpServlet {
 		Cookie[] cookies = request.getCookies();
 		SessionManagement sessionman = new SessionManagement();
 		boolean flag = sessionman.CheckSession(cookies);
-		String path = null;
+		PrintWriter printWriter = response.getWriter();
 		if (flag == true) {
 			String contentType = "text/plain";
 			ContentExtraction checker = new ContentExtraction();
-			PrintWriter printWriter = response.getWriter();
 			RequestDispatcher dispatcher = request.getRequestDispatcher("projectUpload.jsp");
 			Part filePart = request.getPart("fileToUpload");
 			InputStream fileInputStream = filePart.getInputStream();
@@ -97,7 +96,8 @@ public class ProjectUploadServlet extends HttpServlet {
 			}
 
 		} else { // else if flag == false
-			response.sendRedirect("login.jsp");
-		}
+			RequestDispatcher errDispatcher = request.getRequestDispatcher("login.jsp");
+			errDispatcher.include(request, response);
+			printWriter.print("<br><h6>Session has expired.<br>Please, login now!</h6>");		}
 	}
 }

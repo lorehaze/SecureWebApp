@@ -74,9 +74,11 @@
 		</tr>
 
 		<tr>
-			<td><button type="submit" name="Action" value="ShowAll"
-					class="btn btn-outline-dark btn-xs custom-1 custom-3">All
-					Projects</button></td>
+			<td><form action="ShowProjectsServlet" method="get">
+					<input type="submit" value="Show Projects"
+						class="btn btn-outline-dark btn-sm custom-1 custom-3"
+						role="button">
+				</form></td>
 		</tr>
 		<tr>
 			<td>

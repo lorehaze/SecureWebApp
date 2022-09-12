@@ -50,17 +50,17 @@ public class LoginServlet extends HttpServlet {
 			String rememberMe = request.getParameter("rememberme");
 			System.out.println(rememberMe);
 			id_user = dao.getID(user); // getting user ID
+			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 
 			if (id_user == 0) {
-				printWriter.print("<br><h2>User does not exist! <br><br> Please check again.</h2>");
-			} else {
+				dispatcher.include(request, response);
+				printWriter.print("<br><h6>User does not exists!<br><br>Please, register it first.</h6>");			} else {
 				String email = user.getEmail();
 				result = dao.login(user, id_user);
 				Arrays.fill(user.getPassword(), (byte) 0); // empty password array
 				if (result == false) {
-					RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 					dispatcher.include(request, response);
-					printWriter.print("<br><h4>Wrong password. <br><br> Please check your password.</h4>");
+					printWriter.print("<br><h6>Wrong password. <br><br> Please check your password.</h6>");
 				} else {
 
 					SessionManagement token = new SessionManagement();
