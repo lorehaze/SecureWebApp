@@ -22,12 +22,11 @@
 	<table class="table table-borderless" align="center" cellpadding="5">
 		<tr>
 			<td><a href="login.jsp"
-				class="btn btn-outline-success btn-sm custom-1 custom-2"
-				role="button">Login</a></td>
+				class="btn btn-outline-success btn-sm custom-1 custom-2">Login</a></td>
 		</tr>
 		<tr>
 			<td><a href="addUser.jsp"
-				class="btn btn-outline-dark btn-sm custom-1 custom-2" role="button">Register</a>
+				class="btn btn-outline-dark btn-sm custom-1 custom-2">Register</a>
 				<br></td>
 		</tr>
 	</table>

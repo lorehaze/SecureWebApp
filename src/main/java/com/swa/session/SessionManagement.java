@@ -1,34 +1,21 @@
 package com.swa.session;
 
 import java.io.IOException;
-import java.net.http.HttpResponse;
-
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-
 import com.swa.crypt.AES;
 import com.swa.session.SessionManagement;
 
 public class SessionManagement {
 
 	public String SessionToken(String email) {
-
 		AES cypher = new AES();
-
 		String sessionToken = null;
-
 		RandomString randstr = new RandomString(8);
-
 		String mailPart = email.substring(0, 4);
-
 		String temp = (new StringBuilder()).append(randstr).append(mailPart).toString();
-
 		String temp_sessionToken = temp.substring(temp.lastIndexOf("@") + 1, temp.length()); // take only the string
-
 		final String key = email;
-
 		sessionToken = cypher.encrypt(temp_sessionToken, key);
-
 		return sessionToken;
 	}
 

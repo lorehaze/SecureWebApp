@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import com.swa.session.SessionManagement;
-import com.swa.files.ContentExtraction;
 
 /**
  * Servlet implementation class ProjectUploadServlet
@@ -27,7 +25,6 @@ public class ProjectUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private final String UPLOAD_DIRECTORY = "/Users/lorenzo/Documents/GitHub/SecureWebApp/src/main/webapp/uploads/";
-	private static final String FILE_PATTERN = "\\b(.txt)\\b";
 	private final int maxSize = 2097152; // 2 mb
 
 	/**

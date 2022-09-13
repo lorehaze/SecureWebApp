@@ -9,6 +9,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.swa.session.SessionManagement;
 
 /**
@@ -48,13 +50,15 @@ public class LoginServlet extends HttpServlet {
 			user.setEmail((request.getParameter("email")));
 			user.setPassword(request.getParameter("password").getBytes());
 			String rememberMe = request.getParameter("rememberme");
+			String useCookies = request.getParameter("useCookies");
 			System.out.println(rememberMe);
 			id_user = dao.getID(user); // getting user ID
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 
 			if (id_user == 0) {
 				dispatcher.include(request, response);
-				printWriter.print("<br><h6>User does not exists!<br><br>Please, register it first.</h6>");			} else {
+				printWriter.print("<br><h6>User does not exists!<br><br>Please, register it first.</h6>");
+			} else {
 				String email = user.getEmail();
 				result = dao.login(user, id_user);
 				Arrays.fill(user.getPassword(), (byte) 0); // empty password array
@@ -72,6 +76,12 @@ public class LoginServlet extends HttpServlet {
 					ck_key.setHttpOnly(true);
 					ck_email.setSecure(true);
 					ck_key.setSecure(true);
+
+					if (useCookies != null) {
+						HttpSession session = request.getSession();
+						session.setAttribute("email", email);
+						session.setMaxInactiveInterval(30 * 60);
+					}
 
 					if (rememberMe != null) {
 						// set never expire
