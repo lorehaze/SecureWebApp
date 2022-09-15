@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Random;
 
+import org.bouncycastle.util.Arrays;
+
 import com.swa.dbconnection.Database;
 
 public class PasswordHash { // this class uses salt + sha256 for the encoding
@@ -60,26 +62,22 @@ public class PasswordHash { // this class uses salt + sha256 for the encoding
 	public byte[] saltPassword(byte[] pwd, int userID) {
 
 		byte[] salt = generateSalt(pwd.length);
-		System.out.println("SALT: "+salt);
 		byte[] temp = appendArrays(pwd, salt);
-		System.out.println("APPEND ARRAY: " +temp);
-
 		
 		byte[] hashVal = null;
 		boolean flag = false;
 		flag = dbSalt(salt, userID);
-		System.out.println(flag);
 		MessageDigest msgDigest;
 		try {
 			if (flag == true) {
-				
 				msgDigest = MessageDigest.getInstance("SHA-256");
 				hashVal = msgDigest.digest(temp);
 			}
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-		System.out.println("HASHVAL: " + hashVal);
+		Arrays.fill(pwd, (byte)0);
+		Arrays.fill(salt, (byte)0);
 		return hashVal;
 	}
 

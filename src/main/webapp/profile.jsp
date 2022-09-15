@@ -42,7 +42,7 @@
 		%>
 	
 			<img src=ShowPictureServlet?user_id=<%=rs.getInt(1)%>
-				alt="image not found" width="100px" height="100px" class="img-profile">
+				alt="No image uploaded" width="100px" height="100px" class="img-profile">
 		<%
 		}
 		%>

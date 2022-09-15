@@ -10,12 +10,11 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class AES {
 	private static SecretKeySpec secretKey;
-	private static byte[] key;
 
 	public static void setKey(final String myKey) {
 		MessageDigest sha = null;
 		try {
-			key = myKey.getBytes("UTF-8");
+			byte[] key = myKey.getBytes("UTF-8");
 			sha = MessageDigest.getInstance("SHA-1");
 			key = sha.digest(key);
 			key = Arrays.copyOf(key, 16);

@@ -42,6 +42,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (request.getParameter("Action").equals("Login")) {
+			HttpSession oldSession = request.getSession(); //invalidate old session
+			oldSession.invalidate();
 			UserBean user = new UserBean();
 			UserDao dao = new UserDao();
 			int id_user = 0;
@@ -50,11 +52,9 @@ public class LoginServlet extends HttpServlet {
 			user.setEmail((request.getParameter("email")));
 			user.setPassword(request.getParameter("password").getBytes());
 			String rememberMe = request.getParameter("rememberme");
-			String useCookies = request.getParameter("useCookies");
 			System.out.println(rememberMe);
 			id_user = dao.getID(user); // getting user ID
 			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-
 			if (id_user == 0) {
 				dispatcher.include(request, response);
 				printWriter.print("<br><h6>User does not exists!<br><br>Please, register it first.</h6>");
@@ -66,7 +66,6 @@ public class LoginServlet extends HttpServlet {
 					dispatcher.include(request, response);
 					printWriter.print("<br><h6>Wrong password. <br><br> Please check your password.</h6>");
 				} else {
-
 					SessionManagement token = new SessionManagement();
 					response.setContentType("text/html");
 					Cookie ck_email = new Cookie("email", email);
@@ -77,14 +76,13 @@ public class LoginServlet extends HttpServlet {
 					ck_email.setSecure(true);
 					ck_key.setSecure(true);
 
-					if (useCookies != null) {
-						HttpSession session = request.getSession();
-						session.setAttribute("email", email);
-						session.setMaxInactiveInterval(30 * 60);
-					}
+					HttpSession session = request.getSession(true);
+					session.setAttribute("email", email);
+					session.setMaxInactiveInterval(30 * 60);
 
 					if (rememberMe != null) {
 						// set never expire
+						session.setMaxInactiveInterval(-1);
 						ck_email.setMaxAge(-1);
 						ck_key.setMaxAge(-1);
 					} else {

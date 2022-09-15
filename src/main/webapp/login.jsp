@@ -24,11 +24,7 @@
 					placeholder="Insert your password" /></td>
 			</tr>
 			<tr>
-				<td><div class="form-check form-switch">
-						<input class="form-check-input" type="checkbox"
-							id="flexSwitchCheckChecked" name="useCookies"> <label
-							class="form-check-label" for="flexSwitchCheckChecked">Use Cookies</label>
-					</div></td>
+				<td></td>
 				<td><div class="form-check form-switch">
 						<input class="form-check-input" type="checkbox"
 							id="flexSwitchCheckChecked" name="rememberme"> <label

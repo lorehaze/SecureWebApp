@@ -30,7 +30,6 @@ public class UserDao {
 
 	public int getID(UserBean user) {
 		int userid = 0;
-
 		Connection con = Database.getConn_read();
 		String search_id_query = "SELECT `user_id` FROM `user` WHERE email = ? ";
 		try {
@@ -50,9 +49,9 @@ public class UserDao {
 		Connection con = Database.getConn_write();
 		PasswordHash pwd = new PasswordHash();
 		byte[] notSalted = user.getPassword();
-		//System.out.println("not salted:" + notSalted);
+		// System.out.println("not salted:" + notSalted);
 		byte[] salt = pwd.saltPassword(notSalted, userID);
-		//System.out.println("Salt UseDao: " + salt);
+		// System.out.println("Salt UseDao: " + salt);
 		String sql = "INSERT INTO password (pass_id,user_id,password) VALUES (NULL,?,?)";
 		int i = 0;
 		try {
@@ -63,8 +62,9 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		Arrays.fill(user.getPassword(), (byte) 0); // empty password array
-
+		pwd.clearArray(user.getPassword()); // clear arrays
+		pwd.clearArray(notSalted);
+		pwd.clearArray(salt);
 		if (i == 0) {
 			return false;
 		} else {
@@ -112,12 +112,14 @@ public class UserDao {
 			isLogged = 0;
 		}
 
+		pwd.clearArray(temp);
+		pwd.clearArray(saltedPwd);
+
 		if (isLogged == 1) {
 			return true;
 		} else {
 			return false;
 		}
-
 	}
 
 	public boolean userAlredyRegistered(UserBean user) {

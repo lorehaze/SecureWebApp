@@ -49,8 +49,8 @@ public class Database {
 			// Create Properties object.
 			Properties props = new Properties();
 
-			String dbSettingsPropertyFile = "/Users/lorenzo/Desktop/keystore/config.properties";
 			// Properties will use a FileReader object as input.
+			String dbSettingsPropertyFile = "/Users/lorenzo/Desktop/keystore/config.properties";
 			FileReader fReader = new FileReader(dbSettingsPropertyFile);
 
 			// Load jdbc related properties in above file.

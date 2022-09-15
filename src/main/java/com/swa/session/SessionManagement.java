@@ -2,6 +2,7 @@ package com.swa.session;
 
 import java.io.IOException;
 import javax.servlet.http.Cookie;
+import org.bouncycastle.util.Arrays;
 import com.swa.crypt.AES;
 import com.swa.session.SessionManagement;
 
@@ -20,12 +21,9 @@ public class SessionManagement {
 	}
 
 	public boolean CheckSession(Cookie[] cookies) throws IOException {
-
-		AES cypher = new AES();
 		boolean isValidated = false;
 		String email = null;
 		String sessionToken = null;
-
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("email")) {
@@ -35,14 +33,17 @@ public class SessionManagement {
 					sessionToken = cookie.getValue();
 				}
 			}
-
 			if (email != null) {
 				if (sessionToken != null) {
+					AES cypher = new AES();
 					String temp = cypher.decrypt(sessionToken, email);
 					String cmprEmail = email.substring(0, 4);
 					String cmprSessionToken = temp.substring(temp.length() - 4);
 					if (cmprEmail.equals(cmprSessionToken)) {
 						isValidated = true;
+						temp = null;
+						cmprSessionToken = null;
+						sessionToken = null;
 					}
 				}
 			}

@@ -17,9 +17,8 @@ import org.apache.tika.sax.BodyContentHandler;
 
 public class ContentExtraction {
 
-	// regex pattern against LFI/XSS (escaped and unescaped)/SQLi
-	public static final String REGEX_FILE_CONTENT_PATTERN = "(<script>|<\\/script>|\\.jsp|\\?[a-zA-Z]+=)";
-	// public static final String REGEX_FILE_CONTENT_PATTERN = "<script>";
+	// regex pattern against XSS (escaped and unescaped)
+	public static final String REGEX_FILE_CONTENT_PATTERN = "(<script>|<\\/script>)";
 
 	public boolean FileChecker(InputStream file, String ContentType) throws IOException {
 		BufferedInputStream buffStream = new BufferedInputStream(file);
@@ -59,19 +58,12 @@ public class ContentExtraction {
 		boolean isInjected = false;
 		BufferedReader buff = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8));
 		String strCurrentLine = null;
-
-		// check if file reaches function
 		if (buff != null) {
-			// Pattern pattern = Pattern.compile(REGEX_FILE_CONTENT_PATTERN);
 			Pattern pattern = Pattern.compile(REGEX_FILE_CONTENT_PATTERN, Pattern.DOTALL);
-
-			// here i can read lines
-			while ((strCurrentLine = buff.readLine()) != null && !isInjected) {
-				System.out.println("CURRENT LINE: " + strCurrentLine); // PRINT CURRENT LINE
+			while ((strCurrentLine = buff.readLine()) != null && !isInjected) {	//read all lines
 				Matcher matcher = pattern.matcher(strCurrentLine);
-				// System.out.println("MATCH: " + matcher.find());
 				isInjected = matcher.find();
-			} // end while
+			}
 		}
 		buff.close();
 		System.out.println("IS THIS FILE INJECTED? : " + isInjected);

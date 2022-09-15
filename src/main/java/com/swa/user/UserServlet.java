@@ -44,11 +44,11 @@ public class UserServlet extends HttpServlet {
 				}
 				RequestDispatcher dispatcher = request.getRequestDispatcher("addUser.jsp");
 				dispatcher.include(request, response);
-				printWriter.print("<br><h4>User successfully registered!!</h4>");
+				printWriter.print("<br><h5>User successfully registered!!</h5>");
 			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("addUser.jsp");
 				dispatcher.include(request, response);
-				printWriter.print("<br><h4>User alredy exists!!</h4>");
+				printWriter.print("<br><h6>User alredy exists!!</h6>");
 			}
 		}
 	}
