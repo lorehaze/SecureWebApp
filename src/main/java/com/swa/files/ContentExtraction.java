@@ -23,7 +23,7 @@ public class ContentExtraction {
 	public boolean FileChecker(InputStream file, String ContentType) throws IOException {
 		BufferedInputStream buffStream = new BufferedInputStream(file);
 		boolean flagType = false;
-		long start = System.currentTimeMillis();
+		//long start = System.currentTimeMillis();
 		BodyContentHandler handler = new BodyContentHandler();
 		Metadata metadata = new Metadata();
 		Parser parser = new AutoDetectParser();
